@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CrawlerMapper">
+    <resultMap id="result" type="crawler">
+        <result column="id" property="id"/>
+        <result column="url_id" property="urlId"/>
+        <result column="keyword_id" property="keywordId"/>
+        <result column="pic_url" property="pictureURL"/>
+        <result column="pic_name" property="pictureName"/>
+        <result column="pic_description" property="pictureDescription"/>
+        <result column="pic_web_url" property="webURL"/>
+    </resultMap>
+
+    <sql id="baseColumn">
+        id, keyword_id , url_id, pic_url, pic_name, pic_description, pic_web_url
+    </sql>
+
+    <select id="listAllCrawler" resultMap="result">
+        SELECT <include refid="baseColumn"/> FROM pic
+    </select>
+
+    <select id="getCrawlerTotalBySearchKeywordId" parameterType="Integer" resultType="Long">
+        SELECT COUNT(*) FROM pic WHERE keyword_id = #{keywordId} and url_id = #{urlId}
+    </select>
+
+    <select id="getCrawlerTotalByCommonSearchKeywordId" parameterType="Integer" resultType="Long">
+        SELECT COUNT(*) FROM pic
+        WHERE (keyword_id = #{keywordId} and url_id = -1)
+        OR (keyword_id = -1 and url_id = #{urlId})
+    </select>
+
+    <select id="getPageBySearchKeywordId" parameterType="Integer"  resultMap="result">
+        SELECT <include refid="baseColumn"/> FROM pic WHERE keyword_id = #{keywordId} and url_id = #{urlId} limit #{start}, #{length}
+    </select>
+
+    <select id="getPageByCommonSearchKeywordId" parameterType="Integer"  resultMap="result">
+        SELECT <include refid="baseColumn"/> FROM pic
+        WHERE (keyword_id = #{keywordId} and url_id = -1)
+        OR keyword_id = -1 and url_id = #{urlId}
+        limit #{start}, #{length}
+    </select>
+
+    <insert id="batchInsertCrawler" parameterType="java.util.List">
+        INSERT INTO pic(keyword_id, url_id, pic_url, pic_name, pic_description, pic_web_url) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.keywordId}, #{item.urlId}, #{item.pictureURL}, #{item.pictureName}, #{item.pictureDescription}, #{item.webURL})
+        </foreach>
+    </insert>
+</mapper>

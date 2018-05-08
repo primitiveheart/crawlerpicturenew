@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UrlMapper">
+    <resultMap id="result" type="url">
+        <result column="id" property="id"/>
+        <result column="url_site" property="urlSite"/>
+        <result column="keyword" property="keyword"/>
+        <result column="is_search" property="isSearch"/>
+        <result column="is_new" property="isNew"/>
+    </resultMap>
+
+    <sql id="baseColumn">
+        id, url_site, keyword, is_search, is_new
+    </sql>
+
+    <select id="listUrl" resultMap="result">
+        SELECT <include refid="baseColumn"/>  FROM url
+    </select>
+
+    <select id="getKeywordByUrlSite" parameterType="String" resultMap="result">
+        SELECT <include refid="baseColumn"/>  FROM url WHERE url_site = #{urlSite}
+    </select>
+
+    <select id="getKeywordByIsSearch" parameterType="String" resultMap="result">
+        SELECT <include refid="baseColumn"/>  FROM url WHERE is_search = #{isSearch}
+    </select>
+
+    <select id="getUrlByIsNew" parameterType="String" resultMap="result">
+        SELECT <include refid="baseColumn"/>  FROM url WHERE is_new = #{isNew}
+    </select>
+
+    <select id="getUrlByUrlSiteAndKeyword" parameterType="String" resultMap="result">
+        SELECT <include refid="baseColumn"/> FROM url WHERE url_site = #{urlSite} and keyword = #{keyword}
+    </select>
+
+    <select id="getUrlByKeyword" parameterType="String" resultMap="result">
+        SELECT <include refid="baseColumn"/> FROM url WHERE keyword = #{keyword}
+    </select>
+
+    <update id="batchUpdateUrlByUrlSite" parameterType="java.util.List">
+        UPDATE url SET
+        is_search =
+        <foreach collection="list" item="item" separator=" " open="case id" close="end">
+            WHEN #{item.id}
+            THEN #{item.isSearch}
+        </foreach>
+        ,is_new =
+        <foreach collection="list" item="item" separator=" " open="case id" close="end">
+            WHEN #{item.id}
+            THEN #{item.isNew}
+        </foreach>
+
+        WHERE id IN
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
+    <insert id="batchInsertUrl" parameterType="java.util.List">
+        INSERT INTO url(url_site, keyword, is_search, is_new) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.urlSite}, #{item.keyword}, #{item.isSearch}, #{item.isNew})
+        </foreach>
+    </insert>
+
+</mapper>
