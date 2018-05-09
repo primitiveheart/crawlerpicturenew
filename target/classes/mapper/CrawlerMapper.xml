@@ -24,8 +24,21 @@
         SELECT COUNT(*) FROM pic WHERE keyword_id = #{keywordId} and url_id = #{urlId}
     </select>
 
+    <select id="getCrawlerTotalByCommonSearchKeywordId" parameterType="Integer" resultType="Long">
+        SELECT COUNT(*) FROM pic
+        WHERE (keyword_id = #{keywordId} and url_id = -1)
+        OR (keyword_id = -1 and url_id = #{urlId})
+    </select>
+
     <select id="getPageBySearchKeywordId" parameterType="Integer"  resultMap="result">
         SELECT <include refid="baseColumn"/> FROM pic WHERE keyword_id = #{keywordId} and url_id = #{urlId} limit #{start}, #{length}
+    </select>
+
+    <select id="getPageByCommonSearchKeywordId" parameterType="Integer"  resultMap="result">
+        SELECT <include refid="baseColumn"/> FROM pic
+        WHERE (keyword_id = #{keywordId} and url_id = -1)
+        OR keyword_id = -1 and url_id = #{urlId}
+        limit #{start}, #{length}
     </select>
 
     <insert id="batchInsertCrawler" parameterType="java.util.List">

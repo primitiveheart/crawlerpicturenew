@@ -127,7 +127,7 @@ public class HomeController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        jsonObject.put("totalCounts", totalCounts);
+        jsonObject.put("pageCount", (totalCounts / pageSize) + 1);
         jsonObject.put("crawlers", crawlers);
 
         ResponseUtils.renderJson(response, jsonObject);

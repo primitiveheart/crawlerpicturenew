@@ -4,10 +4,12 @@
         <title>主页</title>
 
         <link href="resources/css/semantic.min.css" rel="stylesheet" type="text/css">
+        <link href="resources/css/pager.css" rel="stylesheet" type="text/css">
 
 
         <script src="resources/js/jquery-3.2.1.js" language="JavaScript"></script>
         <script src="resources/js/semantic.min.js" language="JavaScript"></script>
+        <script src="resources/js/jquery.pager.js" language="JavaScript"></script>
     </head>
     <body>
     <div class="ui top attached tabular menu">
@@ -141,6 +143,7 @@
                 <#--</#list>-->
             <#--</#if>-->
         </div>
+        <div id="pager"></div>
     </div>
 
     <script language="JavaScript">
@@ -404,7 +407,8 @@
                         $(".all_search_keyword").dropdown({
                             onChange:function(value, text, $choice){
                                 searchKeyword = value;
-                                var totalCounts = 10;//设置默认值
+                                var pageCount = 10;//设置默认值
+                                var pageSize = 10;
 
                                 $.ajax({
                                     url:"getPageBySearchKeyword.html",
@@ -412,12 +416,12 @@
                                     async:false,
                                     data:{
                                         currentPage:1,
-                                        pageSize:10,
+                                        pageSize: pageSize,
                                         searchKeyword: searchKeyword
                                     },
                                     success:function(result){
-                                        if(result != "" && result.totalCounts != ""){
-                                            totalCounts = result.totalCounts;
+                                        if(result != "" && result.pageCount != ""){
+                                            pageCount = result.pageCount;
                                         }
 
                                         if(result != "" && result.crawlers != "" && result.crawlers.length > 0){
@@ -434,13 +438,61 @@
                                     }
                                 })
 
+
+                                pageClick = function (pageClickNumber) {
+//                                    pageClickNumber = parseInt(pageClickNumber);
+                                    $.ajax({
+                                        url:"getPageBySearchKeyword.html",
+                                        type: "get",
+                                        async: false,
+                                        data:{
+                                            currentPage:pageClickNumber,
+                                            pageSize: pageSize,
+                                            searchKeyword: searchKeyword
+                                        },
+                                        success:function(result){
+                                            //清除ui items下的元素
+                                            $(".ui.items").empty();
+                                            if(result != "" && result.totalCounts != ""){
+                                                totalCounts = result.totalCounts;
+                                            }
+
+                                            if(result != "" && result.crawlers != "" && result.crawlers.length > 0){
+                                                var midlleCrawlers = result.crawlers;
+                                                for(var i = 0 ; i < midlleCrawlers.length; i++){
+                                                    var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> <img src="'+midlleCrawlers[i].pictureURL+'"> </div> <div class="content"> <a class="header">'+
+                                                            midlleCrawlers[i].pictureName+'</a> <div class="meta"> <span><a href="'+
+                                                            midlleCrawlers[i].webURL+'">该条信息来源于</a></span> </div> <div class="description"> <p>'+
+                                                            midlleCrawlers[i].pictureDescription+'</p> </div> </div> </div>');
+                                                    $item.appendTo($(".ui.items"));
+                                                }
+                                            }
+                                        }
+                                    })
+
+                                    $("#pager").pager({
+                                        pagenumber:pageClickNumber,
+                                        pagecount:pageCount,
+                                        buttonClickCallback:pageClick
+                                    })
+                                }
+
+                                $("#pager").pager({
+                                    pagenumber:1,
+                                    pagecount:pageCount,
+                                    buttonClickCallback:pageClick
+                                })
+                                
+
+
                             }
                         })
                     }
                 }
             })
-
         })
+
+
     </script>
     </body>
 </html>

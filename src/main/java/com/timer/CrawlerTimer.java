@@ -13,9 +13,9 @@ public class CrawlerTimer {
 
     public CrawlerTimer(ServletContextEvent servletContextEvent){
         Calendar calendar = Calendar.getInstance();
-        //定制每日2:00执行
-        calendar.set(Calendar.HOUR_OF_DAY, 19);
-        calendar.set(Calendar.MINUTE, 25);
+        //定制每日12:00执行
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.MINUTE, 56);
         calendar.set(Calendar.SECOND, 10);
 
         //第一次执行任务的时间

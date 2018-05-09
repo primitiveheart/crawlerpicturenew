@@ -26,6 +26,10 @@
         SELECT <include refid="baseColumn"/>  FROM url WHERE is_search = #{isSearch}
     </select>
 
+    <select id="getUrlByIsNew" parameterType="String" resultMap="result">
+        SELECT <include refid="baseColumn"/>  FROM url WHERE is_new = #{isNew}
+    </select>
+
     <select id="getUrlByUrlSiteAndKeyword" parameterType="String" resultMap="result">
         SELECT <include refid="baseColumn"/> FROM url WHERE url_site = #{urlSite} and keyword = #{keyword}
     </select>
