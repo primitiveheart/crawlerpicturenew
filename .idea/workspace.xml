@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="930e508b-d720-43d9-b817-306b0b111c19" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/config/log4j.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/algorithm/BaiduPictureCrawler.java" afterPath="$PROJECT_DIR$/src/main/java/com/algorithm/BaiduPictureCrawler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/controller/HomeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/controller/HomeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/entity/Crawler.java" afterPath="$PROJECT_DIR$/src/main/java/com/entity/Crawler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java" afterPath="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/util/Utils.java" afterPath="$PROJECT_DIR$/src/main/java/com/util/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config/db.xml" afterPath="$PROJECT_DIR$/src/main/resources/config/db.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config/springmvc.xml" afterPath="$PROJECT_DIR$/src/main/resources/config/springmvc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home.ftl" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home.ftl" />
     </list>
     <ignored path="crawlerpicture.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,15 +29,15 @@
       <file leaf-file-name="CrawlerTimerTask.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="101" column="9" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
+            <state relative-caret-position="1375">
+              <caret line="100" column="51" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="51" />
               <folding>
-                <element signature="e#1474#1906#0" expanded="true" />
-                <element signature="e#1905#1906#0" expanded="true" />
-                <element signature="e#1962#2442#0" expanded="true" />
-                <element signature="e#2441#2442#0" expanded="true" />
-                <element signature="e#2584#3019#0" expanded="true" />
-                <element signature="e#3018#3019#0" expanded="true" />
+                <element signature="e#1480#2006#0" expanded="true" />
+                <element signature="e#2005#2006#0" expanded="true" />
+                <element signature="e#2062#2640#0" expanded="true" />
+                <element signature="e#2639#2640#0" expanded="true" />
+                <element signature="e#2782#3296#0" expanded="true" />
+                <element signature="e#3295#3296#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,8 +86,8 @@
       <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/util/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="101" column="64" selection-start-line="101" selection-start-column="64" selection-end-line="101" selection-end-column="64" />
+            <state relative-caret-position="-35">
+              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -234,9 +225,9 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/com/entity/Crawler.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/util/Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/algorithm/BaiduPictureCrawler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/HomeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/util/Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java" />
       </list>
     </option>
@@ -1346,12 +1337,12 @@
       <workItem from="1525734435346" duration="15667000" />
       <workItem from="1525754440322" duration="8706000" />
       <workItem from="1525845425063" duration="10092000" />
-      <workItem from="1525855600500" duration="17240000" />
+      <workItem from="1525855600500" duration="17850000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118514000" />
+    <option name="totallyTimeSpent" value="119124000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1367,7 +1358,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14174107" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17502788" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1799,14 +1790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/util/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="101" column="64" selection-start-line="101" selection-start-column="64" selection-end-line="101" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/BaiduPictureCrawler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
@@ -1830,17 +1813,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/util/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-35">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="101" column="9" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
+        <state relative-caret-position="1375">
+          <caret line="100" column="51" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="51" />
           <folding>
-            <element signature="e#1474#1906#0" expanded="true" />
-            <element signature="e#1905#1906#0" expanded="true" />
-            <element signature="e#1962#2442#0" expanded="true" />
-            <element signature="e#2441#2442#0" expanded="true" />
-            <element signature="e#2584#3019#0" expanded="true" />
-            <element signature="e#3018#3019#0" expanded="true" />
+            <element signature="e#1480#2006#0" expanded="true" />
+            <element signature="e#2005#2006#0" expanded="true" />
+            <element signature="e#2062#2640#0" expanded="true" />
+            <element signature="e#2639#2640#0" expanded="true" />
+            <element signature="e#2782#3296#0" expanded="true" />
+            <element signature="e#3295#3296#0" expanded="true" />
           </folding>
         </state>
       </provider>
