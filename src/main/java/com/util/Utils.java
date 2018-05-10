@@ -62,6 +62,8 @@ public class Utils {
     public static List<Crawler> getHtmlPicRelateContentByURL(String url, String keyword, Integer id) throws Exception{
         List<Crawler> crawlers = new ArrayList<>();
         String html = Utils.getHtml(url);
+        Integer bodyFrequence = getHtmlKeyWordNumber(html, keyword);
+        Integer titleFrequence = getTitleKeywordNumber(html, keyword);
         Document doc = Jsoup.parse(html);
         Elements elements = doc.select("div > img");
         for(Element element : elements){
@@ -85,7 +87,8 @@ public class Utils {
                     crawler.setWebURL(url);
                     crawler.setPictureName(alt);
                     crawler.setPictureDescription(description);
-
+                    crawler.setBodyFrequence(bodyFrequence);
+                    crawler.setTitleFrequence(titleFrequence);
                 }else {
                     //这是对某个网站搜索的结果
                     if(alt.contains(keyword)){
@@ -95,6 +98,8 @@ public class Utils {
                         crawler.setWebURL(url);
                         crawler.setPictureName(alt);
                         crawler.setPictureDescription(description);
+                        crawler.setBodyFrequence(bodyFrequence);
+                        crawler.setTitleFrequence(titleFrequence);
                     }
                 }
                 crawlers.add(crawler);
@@ -104,6 +109,34 @@ public class Utils {
         }
         return crawlers;
     }
+
+    /**
+     * 统计某个网页中某个字段的次数
+     * @param text
+     * @param keyword
+     * @return
+     */
+    public static Integer getHtmlKeyWordNumber(String text, String keyword){
+        Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(text);
+        int count = 0;
+        while (matcher.find()){
+            count++;
+        }
+        return count;
+    }
+
+    public static Integer getTitleKeywordNumber(String text, String keyword){
+        Pattern pattern = Pattern.compile("<title>.*?</title>");
+        Matcher matcher = pattern.matcher(text);
+        int count = 0;
+        while (matcher.find()){
+            count++;
+        }
+        return count;
+    }
+
+
 
     public static String getPictureContextDescription(Element element) {
         String description = "";

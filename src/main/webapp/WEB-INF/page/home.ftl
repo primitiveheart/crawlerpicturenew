@@ -15,7 +15,8 @@
     <div class="ui top attached tabular menu">
         <a class="active item" data-tab="baidu">百度</a>
         <a class="item" data-tab="someweb">网站列表</a>
-        <a class="item" data-tab="result">查看上一次的结果</a>
+        <a class="item" data-tab="result">查看最近一次提交的结果</a>
+        <a class="item" data-tab="alreadyKeywordResult">本地数据库中已经爬虫的结果</a>
     </div>
     <div class="ui bottom attached active tab segment" data-tab="baidu">
         <div class="ui sub header">已有的关键字</div>
@@ -44,7 +45,7 @@
     </div>
 
     <div class="ui bottom attached tab segment" data-tab="someweb">
-        <div class="ui sub header">已有的网址</div>
+        <div class="ui header">已有的网址</div>
         <select multiple="" class="ui fluid normal dropdown urls">
         <#if urls?? && urls?size gt 0>
             <#list urls as u>
@@ -79,7 +80,7 @@
 
         <div class="ui divider"></div>
 
-        <div class="ui sub header">添加新增的url(某个网站)(目前只能添加一个新的网址)</div>
+        <div class="ui header">添加新增的url(某个网站)(目前只能添加一个新的网址)</div>
         <div class="ui input">
             <input class="url_input" type="text" placeholder="新增的url">
             <button class="ui green button url_new_add">添加网址</button>
@@ -115,7 +116,7 @@
 
     <div class="ui bottom attached tab segment" data-tab="result">
         <div class="ui header">搜索的关键字</div>
-        <div class="ui  dropdown all_search_keyword">
+        <div class="ui selection dropdown all_search_keyword">
             <input class="all_search_keyword_input" type="hidden" value="">
             <i class="dropdown icon"></i>
             <div class="default text">搜索的关键字</div>
@@ -123,27 +124,24 @@
             </div>
         </div>
         <div class="ui sub header">该搜索的关键字对应的结果</div>
-        <div class="ui items">
-            <#--<#if crawlers?? && crawlers?size gt 0>-->
-                <#--<#list crawlers as c>-->
-                    <#--<div class="item">-->
-                        <#--<div class="image" style="width: 100;height: 100">-->
-                            <#--<img src="${c.pictureURL}">-->
-                        <#--</div>-->
-                        <#--<div class="content">-->
-                            <#--<a class="header">${c.pictureName}</a>-->
-                            <#--<div class="meta">-->
-                                <#--<span><a href="${c.webURL}">该条信息来源于</a></span>-->
-                            <#--</div>-->
-                            <#--<div class="description">-->
-                                <#--<p>${c.pictureDescription}</p>-->
-                            <#--</div>-->
-                        <#--</div>-->
-                    <#--</div>-->
-                <#--</#list>-->
-            <#--</#if>-->
+        <div class="ui items keyword_result_list">
         </div>
         <div id="pager"></div>
+    </div>
+
+    <div class="ui bottom attached tab segment" data-tab="alreadyKeywordResult">
+        <div class="ui header">本地数据库已经爬虫的关键字</div>
+        <div class="ui selection dropdown all_alreadyCrawler_keyword">
+            <input class="all_alreadyCrawler_input" type="hidden" value="">
+            <i class="dropdown icon"></i>
+            <div class="default text">本地数据库已经爬虫的关键字</div>
+            <div class="menu">
+            </div>
+        </div>
+        <div class="ui sub header">该已经爬虫关键字对应的结果</div>
+        <div class="ui items alreadyCrawler_keyword_result_list">
+        </div>
+        <div id="pager2"></div>
     </div>
 
     <script language="JavaScript">
@@ -407,91 +405,128 @@
                         $(".all_search_keyword").dropdown({
                             onChange:function(value, text, $choice){
                                 searchKeyword = value;
-                                var pageCount = 10;//设置默认值
-                                var pageSize = 10;
-
-                                $.ajax({
-                                    url:"getPageBySearchKeyword.html",
-                                    type:"get",
-                                    async:false,
-                                    data:{
-                                        currentPage:1,
-                                        pageSize: pageSize,
-                                        searchKeyword: searchKeyword
-                                    },
-                                    success:function(result){
-                                        if(result != "" && result.pageCount != ""){
-                                            pageCount = result.pageCount;
-                                        }
-
-                                        if(result != "" && result.crawlers != "" && result.crawlers.length > 0){
-                                            var midlleCrawlers = result.crawlers;
-                                            for(var i = 0 ; i < midlleCrawlers.length; i++){
-                                                var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> <img src="'+midlleCrawlers[i].pictureURL+'"> </div> <div class="content"> <a class="header">'+
-                                                        midlleCrawlers[i].pictureName+'</a> <div class="meta"> <span><a href="'+
-                                                        midlleCrawlers[i].webURL+'">该条信息来源于</a></span> </div> <div class="description"> <p>'+
-                                                        midlleCrawlers[i].pictureDescription+'</p> </div> </div> </div>');
-                                                $item.appendTo($(".ui.items"));
-                                            }
-                                        }
-
-                                    }
-                                })
-
-
-                                pageClick = function (pageClickNumber) {
-//                                    pageClickNumber = parseInt(pageClickNumber);
-                                    $.ajax({
-                                        url:"getPageBySearchKeyword.html",
-                                        type: "get",
-                                        async: false,
-                                        data:{
-                                            currentPage:pageClickNumber,
-                                            pageSize: pageSize,
-                                            searchKeyword: searchKeyword
-                                        },
-                                        success:function(result){
-                                            //清除ui items下的元素
-                                            $(".ui.items").empty();
-                                            if(result != "" && result.totalCounts != ""){
-                                                totalCounts = result.totalCounts;
-                                            }
-
-                                            if(result != "" && result.crawlers != "" && result.crawlers.length > 0){
-                                                var midlleCrawlers = result.crawlers;
-                                                for(var i = 0 ; i < midlleCrawlers.length; i++){
-                                                    var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> <img src="'+midlleCrawlers[i].pictureURL+'"> </div> <div class="content"> <a class="header">'+
-                                                            midlleCrawlers[i].pictureName+'</a> <div class="meta"> <span><a href="'+
-                                                            midlleCrawlers[i].webURL+'">该条信息来源于</a></span> </div> <div class="description"> <p>'+
-                                                            midlleCrawlers[i].pictureDescription+'</p> </div> </div> </div>');
-                                                    $item.appendTo($(".ui.items"));
-                                                }
-                                            }
-                                        }
-                                    })
-
-                                    $("#pager").pager({
-                                        pagenumber:pageClickNumber,
-                                        pagecount:pageCount,
-                                        buttonClickCallback:pageClick
-                                    })
-                                }
-
-                                $("#pager").pager({
-                                    pagenumber:1,
-                                    pagecount:pageCount,
-                                    buttonClickCallback:pageClick
-                                })
-                                
-
-
+                                getPageListData(searchKeyword,"keyword_result_list" ,"pager")
                             }
                         })
                     }
                 }
             })
-        })
 
+
+            //该已经爬虫关键字对应的结果
+            var alreadyCrawler = ""
+            $.ajax({
+                url:"getAlreadyCrawlerKeyword.html",
+                type:"get",
+                success:function(result){
+                    if(result != "" && result.crawlerKeywordString != "" && result.crawlerKeywordString.length > 0) {
+                        var middle = result.crawlerKeywordString;
+                        for (var i = 0; i < middle.length; i++) {
+                            if (middle[i].indexOf("_") > 0) {
+                                var $div = $("<div class='item' data-value='" + middle[i] + "'>" + middle[i].split("_")[0] + "</div>");
+                                $div.appendTo($(".all_alreadyCrawler_keyword .menu"));
+                            } else {
+                                var $div = $("<div class='item' data-value='" + middle[i] + "'>" + middle[i] + "</div>");
+                                $div.appendTo($(".all_alreadyCrawler_keyword .menu"));
+                            }
+                        }
+
+                        $(".all_alreadyCrawler_keyword").dropdown({
+                            onChange:function(value, text, $choice){
+                                alreadyCrawler = value;
+                                getPageListData(alreadyCrawler,"alreadyCrawler_keyword_result_list" ,"pager2")
+                            }
+                        });
+                    }
+                }
+            })
+        })
+        /*
+        第一个参数：关键字
+        第二个参数：查询数据列表对应的class
+        第三个参数：分页容器的id
+         */
+
+        function getPageListData(keyword, queryClass, pagerId){
+            var pageCount = 10;//设置默认值
+            var pageSize = 10;
+            var pageResult = "";
+
+            $.ajax({
+                url:"getPageBySearchKeyword.html",
+                type:"get",
+                async:false,
+                data:{
+                    currentPage:1,
+                    pageSize: pageSize,
+                    searchKeyword: keyword
+                },
+                success:function(result){
+                    pageResult = result;
+                    if(result != "" && result.pageCount != ""){
+                        pageCount = result.pageCount;
+                    }
+
+                    if(result != "" && result.crawlers != "" && result.crawlers.length > 0){
+                        var midlleCrawlers = result.crawlers;
+                        for(var i = 0 ; i < midlleCrawlers.length; i++){
+                            var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> <img src="'+midlleCrawlers[i].pictureURL+'"> </div> <div class="content"> <a class="header">'+
+                                    midlleCrawlers[i].pictureName+'</a> <div class="meta"> <span><a href="'+
+                                    midlleCrawlers[i].webURL+'">该条信息来源于</a></span> </div> <div class="description"> <p>'+
+                                    midlleCrawlers[i].pictureDescription+'</p> </div> </div> </div>');
+                            $item.appendTo($(".ui.items." + queryClass));
+                        }
+                    }
+
+                }
+            })
+
+
+           if(pageResult != "" && pageResult.crawlers != "" && pageResult.crawlers.length > 0) {
+               pageClick = function (pageClickNumber) {
+                   $.ajax({
+                       url:"getPageBySearchKeyword.html",
+                       type: "get",
+                       async: false,
+                       data:{
+                           currentPage:pageClickNumber,
+                           pageSize: pageSize,
+                           searchKeyword: keyword
+                       },
+                       success:function(result){
+                           //清除ui items下的元素
+                           $(".ui.items." + queryClass).empty();
+                           if(result != "" && result.totalCounts != ""){
+                               pageCount = result.pageCount;
+                           }
+
+                           if(result != "" && result.crawlers != "" && result.crawlers.length > 0){
+                               var midlleCrawlers = result.crawlers;
+                               for(var i = 0 ; i < midlleCrawlers.length; i++){
+                                   var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> <img src="'+midlleCrawlers[i].pictureURL+'"> </div> <div class="content"> <a class="header">'+
+                                           midlleCrawlers[i].pictureName+'</a> <div class="meta"> <span><a href="'+
+                                           midlleCrawlers[i].webURL+'">该条信息来源于</a></span> </div> <div class="description"> <p>'+
+                                           midlleCrawlers[i].pictureDescription+'</p> </div> </div> </div>');
+                                   $item.appendTo($(".ui.items." + queryClass));
+                               }
+                           }
+                       }
+                   })
+
+                   $("#" +pagerId).pager({
+                       pagenumber:pageClickNumber,
+                       pagecount:pageCount,
+                       buttonClickCallback:pageClick
+                   })
+               }
+
+               $("#"+pagerId).pager({
+                   pagenumber:1,
+                   pagecount:pageCount,
+                   buttonClickCallback:pageClick
+               })
+           }
+        }
 
     </script>
     </body>

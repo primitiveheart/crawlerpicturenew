@@ -7,6 +7,7 @@ import com.entity.Keyword;
 import com.entity.Url;
 import com.mapper.KeywordMapper;
 import com.mapper.UrlMapper;
+import com.sun.media.sound.UlawCodec;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -63,10 +64,10 @@ public class CrawlerTimerTask extends TimerTask {
             }
         });
         //第二部分:对某个网站进行搜索
+       final UrlMapper urlMapper = webApplicationContext.getBean(UrlMapper.class);
        executorService.execute(new Runnable() {
            @Override
            public void run() {
-               UrlMapper urlMapper = webApplicationContext.getBean(UrlMapper.class);
                List<Url> urls = urlMapper.getUrlByIsNew("1");
 
                WebCrawler webCrawler = webApplicationContext.getBean(WebCrawler.class);
@@ -80,5 +81,24 @@ public class CrawlerTimerTask extends TimerTask {
         executorService.shutdown();
         //TODO
         //第三部分，需要对新爬虫完的关键字，在url和keyword表进行更新isNew状态为0
+        try{
+            //第一步:先查询出来isNew= 1的
+            List<Keyword> keywordList = keywordMapper.getKeywordByIsNew("1");
+            for(int i= 0; i < keywordList.size(); i++){
+                keywordList.get(i).setIsNew("0");
+            }
+
+            List<Url> urlList = urlMapper.getUrlByIsNew("1");
+            for(int i=0; i < urlList.size(); i++){
+                urlList.get(i).setIsNew("0");
+            }
+            //第二步进行更新isNew =0;
+
+            keywordMapper.batchUpdateKeyword(keywordList);
+
+            urlMapper.batchUpdateUrlByUrlSite(urlList);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

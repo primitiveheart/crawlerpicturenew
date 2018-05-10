@@ -81,6 +81,8 @@ public class BaiduPictureCrawler {
                     if(picSourceConn != null && picSourceConn.getResponseCode() != 404){
                         String html = getHtml(picSourceConn);
                         if(!StringUtil.isBlank(html)){
+                            Integer bodyFrequence = Utils.getHtmlKeyWordNumber(html, keyword);
+                            Integer titleFrequence = Utils.getTitleKeywordNumber(html, keyword);
                             Document document = Jsoup.parse(html);
 //                           Elements element = document.select("div p img").attr("src", objectURL);
                             Elements element = document.select("div p img");
@@ -93,6 +95,8 @@ public class BaiduPictureCrawler {
                                 crawler.setWebURL(fromURL);
                                 crawler.setPictureDescription(description);
                                 crawler.setPictureName(fromPageTitleEnc);
+                                crawler.setBodyFrequence(bodyFrequence);
+                                crawler.setTitleFrequence(titleFrequence);
                                 crawlers.add(crawler);
                             }
                         }

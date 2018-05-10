@@ -12,6 +12,7 @@ import com.sun.media.sound.UlawCodec;
 import com.util.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -67,6 +68,36 @@ public class HomeController {
         List<Keyword> keywords = keywordMapper.getKeywordByIsSearch("1");
         //来自于网址的关键字
         List<Url> urls = urlMapper.getKeywordByIsSearch("1");
+        List<String> keywordString = getKeywordStringFromUrlAndKeyword(keywords, urls);
+
+        jsonObject.put("keywordString", keywordString);
+
+        ResponseUtils.renderJson(response, jsonObject);
+    }
+
+    @RequestMapping("getAlreadyCrawlerKeyword.html")
+    @ResponseBody
+    public void getAlreadyCrawlerKeyword(HttpServletResponse response){
+        JSONObject jsonObject = new JSONObject();
+        //来自关键字表的关键字
+        List<Keyword> keywords = keywordMapper.getKeywordByIsNew("0");
+        //来自于网址的关键字
+        List<Url> urls = urlMapper.getUrlByIsNew("0");
+        List<String> crawlerKeywordString = getKeywordStringFromUrlAndKeyword(keywords, urls);
+
+        jsonObject.put("crawlerKeywordString", crawlerKeywordString);
+
+        ResponseUtils.renderJson(response, jsonObject);
+
+    }
+
+    /**
+     * 从url表和keyword表中的关键字的字符串
+     * @param keywords
+     * @param urls
+     * @return
+     */
+    public List<String> getKeywordStringFromUrlAndKeyword(List<Keyword> keywords, List<Url> urls) {
         List<String> keywordString = new ArrayList<String>();
         List<String> kKeyword = new ArrayList<String>();
         List<String> uKeyword = new ArrayList<String>();
@@ -93,10 +124,7 @@ public class HomeController {
                 keywordString.add(uKeyword.get(i) + "_webSite");
             }
         }
-
-        jsonObject.put("keywordString", keywordString);
-
-        ResponseUtils.renderJson(response, jsonObject);
+        return keywordString;
     }
 
     @RequestMapping("getPageBySearchKeyword.html")
@@ -138,10 +166,16 @@ public class HomeController {
      * @param newAdd
      */
     @RequestMapping("submitKeyword.html")
+    @Transactional
     public void submitKeyword(String already, String newAdd){
-        //TODO 该方法要进行事务处理
-        //TODO 把上一次搜索进行更新状态 isSearch=1变更为0
         try{
+            //第一步:查询出来isSearch=1
+            List<Keyword> k = keywordMapper.getKeywordByIsSearch("1");
+            //第二步:更新isSearch=0
+            for(int i=0 ;i < k.size(); i++){
+                k.get(i).setIsSearch("0");
+            }
+            keywordMapper.batchUpdateKeyword(k);
             //对于已经存在的关键字
            if(already != ""){
                //第一步：对关键字进行查询
@@ -192,10 +226,16 @@ public class HomeController {
 
     @RequestMapping("submitUrl.html")
     @ResponseBody
+    @Transactional
     public void submitUrl(String alreadyUrl,String alreayUrlNewKeyword, String alreadyUrlKeyword, String newUrl, String newUrlKeyword){
-        //TODO 该方法要进行事务处理
-        //TODO 把上一次搜索进行更新状态 isSearch=1变更为0
         try{
+            //第一步:先查询isSearch = 1的Url
+            List<Url> urls = urlMapper.getKeywordByIsSearch("1");
+            //第二步:进行更新isSearch = 0
+            for(int i=0; i<urls.size(); i++){
+                urls.get(i).setIsSearch("0");
+            }
+            urlMapper.batchUpdateUrlByUrlSite(urls);
             //对于已经存在的网址
             if(alreadyUrl != ""){
                 //第一步: 对于已经存在的网址，进行更新

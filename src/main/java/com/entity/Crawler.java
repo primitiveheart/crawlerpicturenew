@@ -1,5 +1,7 @@
 package com.entity;
 
+import java.io.InputStream;
+
 /**
  * Created by admin on 2018/4/26.
  */
@@ -18,9 +20,14 @@ public class Crawler {
     private String pictureDescription;
     //网页的url
     private String webURL;
+    //标题的频率
+    private Integer titleFrequence;
+    //正文的频率
+    private Integer bodyFrequence;
 
 
-    public Crawler(Long id, Integer urlId, Integer keywordId, String pictureURL, String pictureName, String pictureDescription, String webURL) {
+    public Crawler(Long id, Integer urlId, Integer keywordId, String pictureURL, String pictureName,
+                   String pictureDescription, String webURL, Integer titleFrequence, Integer bodyFrequence) {
         this.id = id;
         this.urlId = urlId;
         this.keywordId = keywordId;
@@ -28,6 +35,8 @@ public class Crawler {
         this.pictureName = pictureName;
         this.pictureDescription = pictureDescription;
         this.webURL = webURL;
+        this.titleFrequence = titleFrequence;
+        this.bodyFrequence = bodyFrequence;
     }
 
     public Long getId() {
@@ -86,5 +95,21 @@ public class Crawler {
 
     public void setWebURL(String webURL) {
         this.webURL = webURL;
+    }
+
+    public Integer getTitleFrequence() {
+        return titleFrequence;
+    }
+
+    public void setTitleFrequence(Integer titleFrequence) {
+        this.titleFrequence = titleFrequence;
+    }
+
+    public Integer getBodyFrequence() {
+        return bodyFrequence;
+    }
+
+    public void setBodyFrequence(Integer bodyFrequence) {
+        this.bodyFrequence = bodyFrequence;
     }
 }
