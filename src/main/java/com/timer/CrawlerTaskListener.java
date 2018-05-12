@@ -1,6 +1,5 @@
 package com.timer;
 
-import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

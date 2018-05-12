@@ -129,13 +129,14 @@ public class Utils {
     }
 
     public static Integer getTitleKeywordNumber(String text, String keyword){
-        Pattern pattern = Pattern.compile("<title>.*?</title>");
+        Pattern pattern = Pattern.compile("<title>(.*?)</title>");
         Matcher matcher = pattern.matcher(text);
+        String title = "";
         int count = 0;
         while (matcher.find()){
-            count++;
+            title = matcher.group(1);
         }
-        return count;
+        return getHtmlKeyWordNumber(title, keyword);
     }
 
 

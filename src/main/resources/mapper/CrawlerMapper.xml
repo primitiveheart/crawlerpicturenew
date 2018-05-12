@@ -50,7 +50,7 @@
         INSERT INTO pic(keyword_id, url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.keywordId}, #{item.urlId}, #{item.pictureURL}, #{item.pictureName},
-            #{item.pictureDescription}, #{item.webURL}, #{titleFrequence}, #{bodyFrequence})
+            #{item.pictureDescription}, #{item.webURL}, #{item.titleFrequence}, #{item.bodyFrequence})
         </foreach>
     </insert>
 </mapper>

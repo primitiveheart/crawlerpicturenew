@@ -10,10 +10,12 @@
         <result column="pic_name" property="pictureName"/>
         <result column="pic_description" property="pictureDescription"/>
         <result column="pic_web_url" property="webURL"/>
+        <result column="title_frequence" property="titleFrequence"/>
+        <result column="body_frequence" property="bodyFrequence"/>
     </resultMap>
 
     <sql id="baseColumn">
-        id, keyword_id , url_id, pic_url, pic_name, pic_description, pic_web_url
+        id, keyword_id , url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence
     </sql>
 
     <select id="listAllCrawler" resultMap="result">
@@ -31,7 +33,10 @@
     </select>
 
     <select id="getPageBySearchKeywordId" parameterType="Integer"  resultMap="result">
-        SELECT <include refid="baseColumn"/> FROM pic WHERE keyword_id = #{keywordId} and url_id = #{urlId} limit #{start}, #{length}
+        SELECT <include refid="baseColumn"/> FROM pic
+        WHERE keyword_id = #{keywordId} and url_id = #{urlId}
+        ORDER BY title_frequence, body_frequence DESC
+        limit #{start}, #{length}
     </select>
 
     <select id="getPageByCommonSearchKeywordId" parameterType="Integer"  resultMap="result">
@@ -42,9 +47,10 @@
     </select>
 
     <insert id="batchInsertCrawler" parameterType="java.util.List">
-        INSERT INTO pic(keyword_id, url_id, pic_url, pic_name, pic_description, pic_web_url) VALUES
+        INSERT INTO pic(keyword_id, url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.keywordId}, #{item.urlId}, #{item.pictureURL}, #{item.pictureName}, #{item.pictureDescription}, #{item.webURL})
+            (#{item.keywordId}, #{item.urlId}, #{item.pictureURL}, #{item.pictureName},
+            #{item.pictureDescription}, #{item.webURL}, #{item.titleFrequence}, #{item.bodyFrequence})
         </foreach>
     </insert>
 </mapper>

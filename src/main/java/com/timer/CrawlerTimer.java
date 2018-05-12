@@ -1,8 +1,16 @@
 package com.timer;
 
+import com.entity.Keyword;
+import com.entity.Url;
+import com.mapper.KeywordMapper;
+import com.mapper.UrlMapper;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import javax.servlet.ServletContextEvent;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 
 /**
@@ -14,9 +22,9 @@ public class CrawlerTimer {
     public CrawlerTimer(ServletContextEvent servletContextEvent){
         Calendar calendar = Calendar.getInstance();
         //定制每日12:00执行
-        calendar.set(Calendar.HOUR_OF_DAY, 17);
-        calendar.set(Calendar.MINUTE, 56);
-        calendar.set(Calendar.SECOND, 10);
+        calendar.set(Calendar.HOUR_OF_DAY, 24);
+        calendar.set(Calendar.MINUTE, 00);
+        calendar.set(Calendar.SECOND, 00);
 
         //第一次执行任务的时间
         Date date = calendar.getTime();
@@ -31,6 +39,32 @@ public class CrawlerTimer {
 
         //每天固定时间执行任务
         timer.schedule(task, date, PERIOD_DAY);
+        //第三部分，需要对新爬虫完的关键字，在url和keyword表进行更新isNew状态为0
+        WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContextEvent.getServletContext());
+        UrlMapper urlMapper = webApplicationContext.getBean(UrlMapper.class);
+        KeywordMapper keywordMapper = webApplicationContext.getBean(KeywordMapper.class);
+        try{
+            //第一步:先查询出来isNew= 1的
+            List<Keyword> keywordList = keywordMapper.getKeywordByIsNew("1");
+            if(keywordList != null && keywordList.size() > 0){
+                for(int i= 0; i < keywordList.size(); i++){
+                    keywordList.get(i).setIsNew("0");
+                }
+
+                //第二步进行更新isNew =0;
+                keywordMapper.batchUpdateKeyword(keywordList);
+            }
+            List<Url> urlList = urlMapper.getUrlByIsNew("1");
+            if(urlList != null &&urlList.size() > 0){
+                for(int i=0; i < urlList.size(); i++){
+                    urlList.get(i).setIsNew("0");
+                }
+                //第二步进行更新isNew =0;
+                urlMapper.batchUpdateUrlByUrlSite(urlList);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public Date addDay(Date date, int num){

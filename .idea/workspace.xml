@@ -2,8 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="930e508b-d720-43d9-b817-306b0b111c19" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/algorithm/BaiduPictureCrawler.class" afterPath="$PROJECT_DIR$/target/classes/com/algorithm/BaiduPictureCrawler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/classes/com/controller/HomeController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/entity/Crawler.class" afterPath="$PROJECT_DIR$/target/classes/com/entity/Crawler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/timer/CrawlerTimer.class" afterPath="$PROJECT_DIR$/target/classes/com/timer/CrawlerTimer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/timer/CrawlerTimerTask.class" afterPath="$PROJECT_DIR$/target/classes/com/timer/CrawlerTimerTask.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/util/Utils.class" afterPath="$PROJECT_DIR$/target/classes/com/util/Utils.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/algorithm/BaiduPictureCrawler.class" afterPath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/algorithm/BaiduPictureCrawler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/controller/HomeController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/entity/Crawler.class" afterPath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/entity/Crawler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/timer/CrawlerTimer.class" afterPath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/timer/CrawlerTimer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/timer/CrawlerTimerTask.class" afterPath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/timer/CrawlerTimerTask.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/util/Utils.class" afterPath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/com/util/Utils.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/crawler.sql" afterPath="$PROJECT_DIR$/doc/crawler.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTaskListener.java" afterPath="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTaskListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimer.java" afterPath="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java" afterPath="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/util/Utils.java" afterPath="$PROJECT_DIR$/src/main/java/com/util/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/CrawlerMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/CrawlerMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/mapper/CrawlerMapper.xml" afterPath="$PROJECT_DIR$/target/crawlerpicture/WEB-INF/classes/mapper/CrawlerMapper.xml" />
     </list>
     <ignored path="crawlerpicture.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,19 +45,65 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CrawlerTimerTask.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CrawlerTimerTask.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1375">
-              <caret line="100" column="51" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="51" />
+            <state relative-caret-position="-758">
+              <caret line="71" column="41" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
               <folding>
-                <element signature="e#1480#2006#0" expanded="true" />
-                <element signature="e#2005#2006#0" expanded="true" />
-                <element signature="e#2062#2640#0" expanded="true" />
-                <element signature="e#2639#2640#0" expanded="true" />
-                <element signature="e#2782#3296#0" expanded="true" />
-                <element signature="e#3295#3296#0" expanded="true" />
+                <element signature="e#1505#2075#0" expanded="true" />
+                <element signature="e#2074#2075#0" expanded="true" />
+                <element signature="e#2139#2765#0" expanded="true" />
+                <element signature="e#2764#2765#0" expanded="true" />
+                <element signature="e#2921#3496#0" expanded="true" />
+                <element signature="e#3495#3496#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CrawlerTaskListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTaskListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebCrawler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/WebCrawler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding>
+                <element signature="e#1007#1016#0" expanded="true" />
+                <marker date="1525852258409" expanded="false" signature="2945:2962" ph="&lt;~&gt;" />
+                <marker date="1525852258409" expanded="false" signature="6055:6072" ph="&lt;~&gt;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CrawlerTimer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="22" column="51" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CrawlerMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mapper/CrawlerMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="158">
+              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -46,14 +111,9 @@
       <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1763">
+            <state relative-caret-position="642">
               <caret line="238" column="11" selection-start-line="238" selection-start-column="11" selection-end-line="238" selection-end-column="11" />
-              <folding>
-                <element signature="e#3165#3173#0" expanded="true" />
-                <element signature="e#3222#3230#0" expanded="true" />
-                <element signature="e#3279#3287#0" expanded="true" />
-                <element signature="e#3341#3349#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -61,24 +121,19 @@
       <file leaf-file-name="BaiduPictureCrawler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/BaiduPictureCrawler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="98" column="72" selection-start-line="98" selection-start-column="72" selection-end-line="98" selection-end-column="72" />
-              <folding>
-                <element signature="e#1751#1760#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-868">
+              <caret line="46" column="75" selection-start-line="46" selection-start-column="75" selection-end-line="46" selection-end-column="75" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home.ftl">
+      <file leaf-file-name="crawler.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/crawler.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="484" column="73" selection-start-line="484" selection-start-column="73" selection-end-line="484" selection-end-column="73" />
-              <folding>
-                <marker date="1525911314076" expanded="true" signature="19456:19478" ph="..." />
-                <marker date="1525911314076" expanded="true" signature="21255:21277" ph="..." />
-              </folding>
+            <state relative-caret-position="347">
+              <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -86,48 +141,9 @@
       <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/util/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-35">
-              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+            <state relative-caret-position="3003">
+              <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Crawler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Crawler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="25" column="33" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="33" />
-              <folding>
-                <element signature="e#1461#1462#0" expanded="true" />
-                <element signature="e#1503#1504#0" expanded="true" />
-                <element signature="e#2263#2264#0" expanded="true" />
-                <element signature="e#2300#2301#0" expanded="true" />
-                <element signature="e#2361#2362#0" expanded="true" />
-                <element signature="e#2413#2414#0" expanded="true" />
-                <element signature="e#2454#2455#0" expanded="true" />
-                <element signature="e#2490#2491#0" expanded="true" />
-                <element signature="e#2549#2550#0" expanded="true" />
-                <element signature="e#2599#2600#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CrawlerMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-              <folding>
-                <marker date="1525912962241" expanded="true" signature="1011:1056" ph="SELECT FROM pic" />
-                <marker date="1525912962241" expanded="true" signature="1173:1251" ph="SELECT COUNT... pic" />
-                <marker date="1525912962241" expanded="true" signature="1374:1507" ph="SELECT COUNT... pic" />
-                <marker date="1525912962241" expanded="true" signature="1618:1625" ph="SELECT ##inse... " />
-                <marker date="1525912962241" expanded="true" signature="1618:1813" ph="SELECT FROM pic" />
-                <marker date="1525912962241" expanded="true" signature="1930:2116" ph="SELECT FROM pic" />
-                <marker date="1525912962241" expanded="true" signature="2208:2325" ph="INSERT INTO pic... " />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -135,29 +151,11 @@
       <file leaf-file-name="BaiduSearchResultCrawler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/BaiduSearchResultCrawler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="springmvc.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/config/springmvc.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/config/db.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="54" column="68" selection-start-line="54" selection-start-column="68" selection-end-line="54" selection-end-column="68" />
-              <folding />
+            <state relative-caret-position="-1023">
+              <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+              <folding>
+                <element signature="e#903#912#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -206,7 +204,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/config/sqlConfiguration.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/config/spring.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTaskListener.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/KeywordMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/resources/js/pagination.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/entity/Url.java" />
@@ -215,7 +212,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/mapper/UrlMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/algorithm/BaiduSearchResultCrawler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/algorithm/WebCrawler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimer.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/resources/js/jquery.pager.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/resources/css/pager.css" />
         <option value="$PROJECT_DIR$/README.md" />
@@ -224,11 +220,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/mapper/KeywordMapper.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/com/entity/Crawler.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/algorithm/BaiduPictureCrawler.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/HomeController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTaskListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/util/Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimer.java" />
       </list>
     </option>
   </component>
@@ -287,7 +285,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -692,8 +690,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -703,7 +701,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="D:\node\node-v8.9.1-win-x64\node.exe" />
     <property name="extract.method.default.visibility" value="public" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../crawler" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../demo" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -1337,12 +1335,14 @@
       <workItem from="1525734435346" duration="15667000" />
       <workItem from="1525754440322" duration="8706000" />
       <workItem from="1525845425063" duration="10092000" />
-      <workItem from="1525855600500" duration="17850000" />
+      <workItem from="1525855600500" duration="19112000" />
+      <workItem from="1526022292346" duration="3501000" />
+      <workItem from="1526106720319" duration="3902000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119124000" />
+    <option name="totallyTimeSpent" value="127789000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1358,7 +1358,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14174107" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14174107" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17502788" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1375,17 +1375,17 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24733475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.234375" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.296875" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1404,30 +1404,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/algorithm/WebCrawler.java</url>
-          <line>38</line>
-          <properties />
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/algorithm/WebCrawler.java</url>
           <line>184</line>
           <properties />
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/algorithm/BaiduSearchResultCrawler.java</url>
-          <line>33</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java</url>
+          <line>37</line>
           <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/util/Utils.java</url>
-          <line>62</line>
-          <properties />
-          <option name="timeStamp" value="40" />
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="47" />
+      <option name="time" value="56" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1441,7 +1429,7 @@
         <state relative-caret-position="175">
           <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1007#1016#0" expanded="true" />
             <marker date="1525852258409" expanded="false" signature="2945:2962" ph="&lt;~&gt;" />
             <marker date="1525852258409" expanded="false" signature="6055:6072" ph="&lt;~&gt;" />
           </folding>
@@ -1537,16 +1525,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTaskListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="12" column="74" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/jdk1.8/installer/src.zip!/java/lang/NumberFormatException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
@@ -1561,13 +1539,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/js/pagination.js" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/js/jquery.pagination.min.js" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/jquery.pagination.css" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mapper/CrawlerMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Url.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
@@ -1576,13 +1547,6 @@
             <element signature="e#354#355#0" expanded="false" />
             <element signature="e#382#383#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/crawler.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1601,19 +1565,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/pager.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1621,43 +1576,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="515">
           <caret line="121" column="22" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="255">
             <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/WebCrawler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-350">
-          <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1525852258409" expanded="false" signature="2945:2962" ph="&lt;~&gt;" />
-            <marker date="1525852258409" expanded="false" signature="6055:6072" ph="&lt;~&gt;" />
-          </folding>
+      <provider editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
         </state>
       </provider>
     </entry>
@@ -1665,13 +1603,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/springmvc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
+        <state relative-caret-position="1347">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
@@ -1679,7 +1616,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/db.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
+        <state relative-caret-position="1347">
           <caret line="54" column="68" selection-start-line="54" selection-start-column="68" selection-end-line="54" selection-end-column="68" />
           <folding />
         </state>
@@ -1707,7 +1644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="19" column="40" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1715,7 +1651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
           <caret line="19" column="27" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1736,17 +1671,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/BaiduSearchResultCrawler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/home.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
+        <state relative-caret-position="12100">
           <caret line="484" column="73" selection-start-line="484" selection-start-column="73" selection-end-line="484" selection-end-column="73" />
           <folding>
             <marker date="1525911314076" expanded="true" signature="19456:19478" ph="..." />
@@ -1757,82 +1684,157 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Crawler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
+        <state relative-caret-position="625">
           <caret line="25" column="33" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="33" />
           <folding>
-            <element signature="e#1461#1462#0" expanded="true" />
-            <element signature="e#1503#1504#0" expanded="true" />
-            <element signature="e#2263#2264#0" expanded="true" />
-            <element signature="e#2300#2301#0" expanded="true" />
-            <element signature="e#2361#2362#0" expanded="true" />
-            <element signature="e#2413#2414#0" expanded="true" />
-            <element signature="e#2454#2455#0" expanded="true" />
-            <element signature="e#2490#2491#0" expanded="true" />
-            <element signature="e#2549#2550#0" expanded="true" />
-            <element signature="e#2599#2600#0" expanded="true" />
+            <element signature="e#1116#1117#0" expanded="false" />
+            <element signature="e#1141#1142#0" expanded="false" />
+            <element signature="e#1175#1176#0" expanded="false" />
+            <element signature="e#1203#1204#0" expanded="false" />
+            <element signature="e#1236#1237#0" expanded="false" />
+            <element signature="e#1264#1265#0" expanded="false" />
+            <element signature="e#1307#1308#0" expanded="false" />
+            <element signature="e#1341#1342#0" expanded="false" />
+            <element signature="e#1378#1379#0" expanded="false" />
+            <element signature="e#1410#1411#0" expanded="false" />
+            <element signature="e#1461#1462#0" expanded="false" />
+            <element signature="e#1503#1504#0" expanded="false" />
+            <element signature="e#1564#1565#0" expanded="false" />
+            <element signature="e#1597#1598#0" expanded="false" />
+            <element signature="e#1649#1650#0" expanded="false" />
+            <element signature="e#1693#1694#0" expanded="false" />
+            <element signature="e#1731#1732#0" expanded="false" />
+            <element signature="e#1765#1766#0" expanded="false" />
+            <element signature="e#1819#1820#0" expanded="false" />
+            <element signature="e#1865#1866#0" expanded="false" />
+            <element signature="e#1910#1911#0" expanded="false" />
+            <element signature="e#1951#1952#0" expanded="false" />
+            <element signature="e#2019#2020#0" expanded="false" />
+            <element signature="e#2079#2080#0" expanded="false" />
+            <element signature="e#2112#2113#0" expanded="false" />
+            <element signature="e#2141#2142#0" expanded="false" />
+            <element signature="e#2185#2186#0" expanded="false" />
+            <element signature="e#2221#2222#0" expanded="false" />
+            <element signature="e#2263#2264#0" expanded="false" />
+            <element signature="e#2300#2301#0" expanded="false" />
+            <element signature="e#2361#2362#0" expanded="false" />
+            <element signature="e#2413#2414#0" expanded="false" />
+            <element signature="e#2454#2455#0" expanded="false" />
+            <element signature="e#2490#2491#0" expanded="false" />
+            <element signature="e#2549#2550#0" expanded="false" />
+            <element signature="e#2599#2600#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/CrawlerMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        <state relative-caret-position="1303">
+          <caret line="52" column="87" selection-start-line="52" selection-start-column="87" selection-end-line="52" selection-end-column="87" />
           <folding>
-            <marker date="1525912962241" expanded="true" signature="1011:1056" ph="SELECT FROM pic" />
-            <marker date="1525912962241" expanded="true" signature="1173:1251" ph="SELECT COUNT... pic" />
-            <marker date="1525912962241" expanded="true" signature="1374:1507" ph="SELECT COUNT... pic" />
-            <marker date="1525912962241" expanded="true" signature="1618:1625" ph="SELECT ##inse... " />
-            <marker date="1525912962241" expanded="true" signature="1618:1813" ph="SELECT FROM pic" />
-            <marker date="1525912962241" expanded="true" signature="1930:2116" ph="SELECT FROM pic" />
-            <marker date="1525912962241" expanded="true" signature="2208:2325" ph="INSERT INTO pic... " />
+            <marker date="1526022876289" expanded="true" signature="1011:1056" ph="SELECT FROM pic" />
+            <marker date="1526022876289" expanded="true" signature="1173:1251" ph="SELECT COUNT... pic" />
+            <marker date="1526022876289" expanded="true" signature="1374:1507" ph="SELECT COUNT... pic" />
+            <marker date="1526022876289" expanded="true" signature="1618:1625" ph="SELECT ##inse... " />
+            <marker date="1526022876289" expanded="true" signature="1618:1813" ph="SELECT FROM pic" />
+            <marker date="1526022876289" expanded="true" signature="1930:2116" ph="SELECT FROM pic" />
+            <marker date="1526022876289" expanded="true" signature="2208:2325" ph="INSERT INTO pic... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/BaiduPictureCrawler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/BaiduSearchResultCrawler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="98" column="72" selection-start-line="98" selection-start-column="72" selection-end-line="98" selection-end-column="72" />
+        <state relative-caret-position="-1023">
+          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
           <folding>
-            <element signature="e#1751#1760#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/HomeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1763">
-          <caret line="238" column="11" selection-start-line="238" selection-start-column="11" selection-end-line="238" selection-end-column="11" />
-          <folding>
-            <element signature="e#3165#3173#0" expanded="true" />
-            <element signature="e#3222#3230#0" expanded="true" />
-            <element signature="e#3279#3287#0" expanded="true" />
-            <element signature="e#3341#3349#0" expanded="true" />
+            <element signature="e#903#912#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/util/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-35">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+        <state relative-caret-position="3003">
+          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/WebCrawler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <element signature="e#1007#1016#0" expanded="true" />
+            <marker date="1525852258409" expanded="false" signature="2945:2962" ph="&lt;~&gt;" />
+            <marker date="1525852258409" expanded="false" signature="6055:6072" ph="&lt;~&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/HomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="642">
+          <caret line="238" column="11" selection-start-line="238" selection-start-column="11" selection-end-line="238" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mapper/CrawlerMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/algorithm/BaiduPictureCrawler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-868">
+          <caret line="46" column="75" selection-start-line="46" selection-start-column="75" selection-end-line="46" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/crawler.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTaskListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimerTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1375">
-          <caret line="100" column="51" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="51" />
+        <state relative-caret-position="-758">
+          <caret line="71" column="41" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
           <folding>
-            <element signature="e#1480#2006#0" expanded="true" />
-            <element signature="e#2005#2006#0" expanded="true" />
-            <element signature="e#2062#2640#0" expanded="true" />
-            <element signature="e#2639#2640#0" expanded="true" />
-            <element signature="e#2782#3296#0" expanded="true" />
-            <element signature="e#3295#3296#0" expanded="true" />
+            <element signature="e#1505#2075#0" expanded="true" />
+            <element signature="e#2074#2075#0" expanded="true" />
+            <element signature="e#2139#2765#0" expanded="true" />
+            <element signature="e#2764#2765#0" expanded="true" />
+            <element signature="e#2921#3496#0" expanded="true" />
+            <element signature="e#3495#3496#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/timer/CrawlerTimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="22" column="51" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
