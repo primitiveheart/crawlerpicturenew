@@ -39,32 +39,6 @@ public class CrawlerTimer {
 
         //每天固定时间执行任务
         timer.schedule(task, date, PERIOD_DAY);
-        //第三部分，需要对新爬虫完的关键字，在url和keyword表进行更新isNew状态为0
-        WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContextEvent.getServletContext());
-        UrlMapper urlMapper = webApplicationContext.getBean(UrlMapper.class);
-        KeywordMapper keywordMapper = webApplicationContext.getBean(KeywordMapper.class);
-        try{
-            //第一步:先查询出来isNew= 1的
-            List<Keyword> keywordList = keywordMapper.getKeywordByIsNew("1");
-            if(keywordList != null && keywordList.size() > 0){
-                for(int i= 0; i < keywordList.size(); i++){
-                    keywordList.get(i).setIsNew("0");
-                }
-
-                //第二步进行更新isNew =0;
-                keywordMapper.batchUpdateKeyword(keywordList);
-            }
-            List<Url> urlList = urlMapper.getUrlByIsNew("1");
-            if(urlList != null &&urlList.size() > 0){
-                for(int i=0; i < urlList.size(); i++){
-                    urlList.get(i).setIsNew("0");
-                }
-                //第二步进行更新isNew =0;
-                urlMapper.batchUpdateUrlByUrlSite(urlList);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     public Date addDay(Date date, int num){

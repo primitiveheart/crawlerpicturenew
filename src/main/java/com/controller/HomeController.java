@@ -70,7 +70,11 @@ public class HomeController {
         List<Url> urls = urlMapper.getKeywordByIsSearch("1");
         List<String> keywordString = getKeywordStringFromUrlAndKeyword(keywords, urls);
 
+        List<Crawler> crawlers = crawlerMapper.getPageByCommonSearchKeywordId(1,10,keywords.get(0).getId(), -1);
+
         jsonObject.put("keywordString", keywordString);
+        jsonObject.put("crawlers", crawlers);
+        jsonObject.put("test", "test");
 
         ResponseUtils.renderJson(response, jsonObject);
     }
@@ -166,16 +170,20 @@ public class HomeController {
      * @param newAdd
      */
     @RequestMapping("submitKeyword.html")
+    @ResponseBody
     @Transactional
     public void submitKeyword(String already, String newAdd){
         try{
             //第一步:查询出来isSearch=1
             List<Keyword> k = keywordMapper.getKeywordByIsSearch("1");
-            //第二步:更新isSearch=0
-            for(int i=0 ;i < k.size(); i++){
-                k.get(i).setIsSearch("0");
-            }
-            keywordMapper.batchUpdateKeyword(k);
+
+           if(k != null && k.size() > 0){
+               //第二步:更新isSearch=0
+               for(int i=0 ;i < k.size(); i++){
+                   k.get(i).setIsSearch("0");
+               }
+               keywordMapper.batchUpdateKeyword(k);
+           }
             //对于已经存在的关键字
            if(already != ""){
                //第一步：对关键字进行查询
@@ -194,30 +202,41 @@ public class HomeController {
                    keyword.setIsNew("0");
                    keywords.add(keyword);
                }
-               //第二步: 对关键字进行修改,进行批量的更新
-               keywordMapper.batchUpdateKeyword(keywords);
+               if(keywords.size() > 0){
+                   //第二步: 对关键字进行修改,进行批量的更新
+                   keywordMapper.batchUpdateKeyword(keywords);
+               }
 
            }
             //对于新增的关键字进行插入
+            //先进行查询看是否存在
             if(newAdd != ""){
                 List<Keyword> newAddKeyword = new ArrayList<Keyword>();
                 if(newAdd.contains(",")){//多个关键字
                     List<String> newAddList = Arrays.asList(newAdd.split(","));
                     for(int i=0; i<newAddList.size(); i++){
+                        Keyword queryKeyword = keywordMapper.getKeywordBykeyword(newAddList.get(i));
+                        if(queryKeyword == null) {
+                            Keyword keyword = new Keyword();
+                            keyword.setIsSearch("1");
+                            keyword.setIsNew("1");
+                            keyword.setKeyword(newAddList.get(i));
+                            newAddKeyword.add(keyword);
+                        }
+                    }
+                }else {//一个关键字
+                    Keyword queryKeyword = keywordMapper.getKeywordBykeyword(newAdd);
+                    if(queryKeyword == null){
                         Keyword keyword = new Keyword();
                         keyword.setIsSearch("1");
                         keyword.setIsNew("1");
-                        keyword.setKeyword(newAddList.get(i));
+                        keyword.setKeyword(newAdd);
                         newAddKeyword.add(keyword);
                     }
-                }else {//一个关键字
-                    Keyword keyword = new Keyword();
-                    keyword.setIsSearch("1");
-                    keyword.setIsNew("1");
-                    keyword.setKeyword(newAdd);
-                    newAddKeyword.add(keyword);
                 }
-                keywordMapper.batchInsertkeyword(newAddKeyword);
+               if(newAddKeyword.size() > 0){
+                   keywordMapper.batchInsertkeyword(newAddKeyword);
+               }
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -231,11 +250,14 @@ public class HomeController {
         try{
             //第一步:先查询isSearch = 1的Url
             List<Url> urls = urlMapper.getKeywordByIsSearch("1");
-            //第二步:进行更新isSearch = 0
-            for(int i=0; i<urls.size(); i++){
-                urls.get(i).setIsSearch("0");
-            }
-            urlMapper.batchUpdateUrlByUrlSite(urls);
+
+           if(urls != null && urls.size() > 0){
+               //第二步:进行更新isSearch = 0
+               for(int i=0; i<urls.size(); i++){
+                   urls.get(i).setIsSearch("0");
+               }
+               urlMapper.batchUpdateUrlByUrlSite(urls);
+           }
             //对于已经存在的网址
             if(alreadyUrl != ""){
                 //第一步: 对于已经存在的网址，进行更新
@@ -260,8 +282,10 @@ public class HomeController {
                             alreadyKeywordList.add(url);
                         }
                     }
-                    //进行批量的更新
-                    urlMapper.batchUpdateUrlByUrlSite(alreadyKeywordList);
+                   if(alreadyKeywordList.size() > 0){
+                       //进行批量的更新
+                       urlMapper.batchUpdateUrlByUrlSite(alreadyKeywordList);
+                   }
                 }
 
 
@@ -271,24 +295,32 @@ public class HomeController {
                    if(alreayUrlNewKeyword.contains(",")){
                        List<String> alreayUrlNewKeywordList = Arrays.asList(alreayUrlNewKeyword.split(","));
                        for(int i =0; i < alreayUrlNewKeywordList.size(); i++){
-                           Url url = new Url();
-                           url.setIsNew("1");
-                           url.setIsSearch("1");
-                           url.setKeyword(alreayUrlNewKeywordList.get(i));
-                           url.setUrlSite(alreadyUrl);
-                           newUrlAndKeyword.add(url);
+                           Url queryUrl = urlMapper.getUrlByKeyword(alreayUrlNewKeywordList.get(i));
+                           if(queryUrl == null){
+                               Url url = new Url();
+                               url.setIsNew("1");
+                               url.setIsSearch("1");
+                               url.setKeyword(alreayUrlNewKeywordList.get(i));
+                               url.setUrlSite(alreadyUrl);
+                               newUrlAndKeyword.add(url);
+                           }
                        }
 
                    }else {
-                       Url url = new Url();
-                       url.setIsNew("1");
-                       url.setIsSearch("1");
-                       url.setKeyword(alreayUrlNewKeyword);
-                       url.setUrlSite(alreadyUrl);
-                       newUrlAndKeyword.add(url);
+                       Url queryUrl = urlMapper.getUrlByKeyword(alreadyUrlKeyword);
+                      if(queryUrl == null){
+                          Url url = new Url();
+                          url.setIsNew("1");
+                          url.setIsSearch("1");
+                          url.setKeyword(alreayUrlNewKeyword);
+                          url.setUrlSite(alreadyUrl);
+                          newUrlAndKeyword.add(url);
+                      }
                    }
-                   //进行批量插入
-                   urlMapper.batchInsertUrl(newUrlAndKeyword);
+                   if(newUrlAndKeyword.size() > 0){
+                       //进行批量插入
+                       urlMapper.batchInsertUrl(newUrlAndKeyword);
+                   }
                }
             }
 
@@ -318,8 +350,10 @@ public class HomeController {
                     }
                 }
 
-                //进行批量插入
-                urlMapper.batchInsertUrl(newUrlList);
+                if(newUrlList.size() > 0){
+                    //进行批量插入
+                    urlMapper.batchInsertUrl(newUrlList);
+                }
             }
         }catch (Exception e){
             e.printStackTrace();

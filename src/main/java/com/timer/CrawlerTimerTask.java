@@ -38,6 +38,7 @@ public class CrawlerTimerTask extends TimerTask {
         final WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContextEvent.getServletContext());
         final KeywordMapper keywordMapper = webApplicationContext.getBean(KeywordMapper.class);
         final List<Keyword> keywords = keywordMapper.getKeywordByIsNew("1");
+        final UrlMapper urlMapper = webApplicationContext.getBean(UrlMapper.class);
         try{
             //第一部分:百度搜索和百度搜索
             //第一步:百度图片
@@ -69,7 +70,6 @@ public class CrawlerTimerTask extends TimerTask {
                 }
             });
 //            第二部分:对某个网站进行搜索
-            final UrlMapper urlMapper = webApplicationContext.getBean(UrlMapper.class);
             executorService.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -91,28 +91,41 @@ public class CrawlerTimerTask extends TimerTask {
             executorService.shutdown();
         }
 
+        //线程是否关闭
         //第三部分，需要对新爬虫完的关键字，在url和keyword表进行更新isNew状态为0
-//        try{
-//            //第一步:先查询出来isNew= 1的
-//            List<Keyword> keywordList = keywordMapper.getKeywordByIsNew("1");
-//            if(keywordList != null && keywordList.size() > 0){
-//                for(int i= 0; i < keywordList.size(); i++){
-//                    keywordList.get(i).setIsNew("0");
-//                }
-//
-//                //第二步进行更新isNew =0;
-//                keywordMapper.batchUpdateKeyword(keywordList);
-//            }
-//            List<Url> urlList = urlMapper.getUrlByIsNew("1");
-//            if(urlList != null &&urlList.size() > 0){
-//               for(int i=0; i < urlList.size(); i++){
-//                   urlList.get(i).setIsNew("0");
-//               }
-//               //第二步进行更新isNew =0;
-//               urlMapper.batchUpdateUrlByUrlSite(urlList);
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        while(true){
+            if(executorService.isTerminated()){
+                try{
+                    //第一步:先查询出来isNew= 1的
+                    List<Keyword> keywordList = keywordMapper.getKeywordByIsNew("1");
+                    if(keywordList != null && keywordList.size() > 0){
+                        for(int i= 0; i < keywordList.size(); i++){
+                            keywordList.get(i).setIsNew("0");
+                        }
+
+                        //第二步进行更新isNew =0;
+                        keywordMapper.batchUpdateKeyword(keywordList);
+                    }
+                    List<Url> urlList = urlMapper.getUrlByIsNew("1");
+                    if(urlList != null &&urlList.size() > 0){
+                        for(int i=0; i < urlList.size(); i++){
+                            urlList.get(i).setIsNew("0");
+                        }
+                        //第二步进行更新isNew =0;
+                        urlMapper.batchUpdateUrlByUrlSite(urlList);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    break;
+                }
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

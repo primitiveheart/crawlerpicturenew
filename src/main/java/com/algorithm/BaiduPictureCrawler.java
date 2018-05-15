@@ -37,14 +37,14 @@ public class BaiduPictureCrawler {
         //该示例是：污水处理厂
         JSONObject jsonObject = new JSONObject();
         try{
-            jsonObject = getJsonObject("污水处理厂", 1);
+            jsonObject = getJsonObject(keyword, 1);
         }catch (Exception e){
            e.printStackTrace();
         }
         String total = jsonObject.getString("bdFmtDispNum").replace("约", "").replace(",","");
         for(int i=1; i < Integer.parseInt(total)/30; i++){
             try{
-                List<Crawler> crawlersTemp = getPictureURL("污水处理厂", i, id);
+                List<Crawler> crawlersTemp = getPictureURL(keyword, i, id);
                 crawlerMapper.batchInsertCrawler(crawlersTemp);
 
             }catch (Exception e){

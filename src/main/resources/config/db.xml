@@ -28,10 +28,16 @@
         <property name="url" value="#{dbproperties.url}"/>
         <property name="username" value="#{dbproperties.username}"/>
         <property name="password" value="#{dbproperties.password}"/>
-        
-        <property name="maxActive" value="100"/>
-        <property name="maxWait" value="5000"/>
-    </bean>
+
+        <property name="initialSize" value="#{dbproperties.initialSize}"/>
+        <property name="maxActive" value="#{dbproperties.maxActive}"/>
+        <property name="minIdle" value="#{dbproperties.minIdle}"/>
+        <property name="maxIdle" value="#{dbproperties.maxIdle}"/>
+        <property name="maxWait" value="#{dbproperties.maxWait}"/>
+
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="1800"/>
+     </bean>
 
     <!--sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
