@@ -24,10 +24,13 @@ public class Crawler {
     private Integer titleFrequence;
     //正文的频率
     private Integer bodyFrequence;
+    //图片的来源,0:表示百度图片，1：表示百度搜索，2：表示某个网站
+    private Integer pictureSource;
 
 
     public Crawler(Long id, Integer urlId, Integer keywordId, String pictureURL, String pictureName,
-                   String pictureDescription, String webURL, Integer titleFrequence, Integer bodyFrequence) {
+                   String pictureDescription, String webURL, Integer titleFrequence, Integer bodyFrequence
+                ,Integer pictureSource) {
         this.id = id;
         this.urlId = urlId;
         this.keywordId = keywordId;
@@ -37,6 +40,7 @@ public class Crawler {
         this.webURL = webURL;
         this.titleFrequence = titleFrequence;
         this.bodyFrequence = bodyFrequence;
+        this.pictureSource = pictureSource;
     }
 
     public Long getId() {
@@ -111,5 +115,13 @@ public class Crawler {
 
     public void setBodyFrequence(Integer bodyFrequence) {
         this.bodyFrequence = bodyFrequence;
+    }
+
+    public Integer getPictureSource() {
+        return pictureSource;
+    }
+
+    public void setPictureSource(Integer pictureSource) {
+        this.pictureSource = pictureSource;
     }
 }

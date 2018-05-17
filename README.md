@@ -8,3 +8,6 @@ newFixedThreadPool 固定的线程池<br>
 newCachedThreadPool 具有缓存的线程池<br>
 newScheduledThreadPool 具有定时的线程池<br>
 newSingleThreadExecutor 具有单一的线程池<br>
+## jsoup
+## HttpURLConnection
+## HtmlUnit

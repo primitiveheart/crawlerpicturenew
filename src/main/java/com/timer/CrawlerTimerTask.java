@@ -8,10 +8,15 @@ import com.entity.Url;
 import com.mapper.KeywordMapper;
 import com.mapper.UrlMapper;
 import com.sun.media.sound.UlawCodec;
+import com.util.Utils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletContextEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.concurrent.Executor;
@@ -36,9 +41,12 @@ public class CrawlerTimerTask extends TimerTask {
         //该方法中需要开辟多个线程
         //核心内容
         final WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContextEvent.getServletContext());
+        final String path = webApplicationContext.getServletContext().getRealPath("/resources/img");
         final KeywordMapper keywordMapper = webApplicationContext.getBean(KeywordMapper.class);
         final List<Keyword> keywords = keywordMapper.getKeywordByIsNew("1");
         final UrlMapper urlMapper = webApplicationContext.getBean(UrlMapper.class);
+
+
         try{
             //第一部分:百度搜索和百度搜索
             //第一步:百度图片
@@ -49,7 +57,7 @@ public class CrawlerTimerTask extends TimerTask {
                     if(keywords != null &&keywords.size() > 0){
                         for(int i=0; i < keywords.size(); i++){
                             //爬取百度图片数据
-                            baiduPictureCrawler.insertBaiduPicResult(keywords.get(i).getKeyword(), keywords.get(i).getId());
+                            baiduPictureCrawler.insertBaiduPicResult(keywords.get(i).getKeyword(), keywords.get(i).getId(), path);
                         }
                     }
                 }

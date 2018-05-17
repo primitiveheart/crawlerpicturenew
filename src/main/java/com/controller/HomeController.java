@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,11 +71,7 @@ public class HomeController {
         List<Url> urls = urlMapper.getKeywordByIsSearch("1");
         List<String> keywordString = getKeywordStringFromUrlAndKeyword(keywords, urls);
 
-        List<Crawler> crawlers = crawlerMapper.getPageByCommonSearchKeywordId(1,10,keywords.get(0).getId(), -1);
-
         jsonObject.put("keywordString", keywordString);
-        jsonObject.put("crawlers", crawlers);
-        jsonObject.put("test", "test");
 
         ResponseUtils.renderJson(response, jsonObject);
     }
@@ -134,33 +131,44 @@ public class HomeController {
     @RequestMapping("getPageBySearchKeyword.html")
     @ResponseBody
     public void getPageBySearchKeyword(HttpServletResponse response, Integer currentPage, Integer pageSize, String searchKeyword){
+
         JSONObject jsonObject = new JSONObject();
         Integer startIndex = (currentPage - 1) * pageSize;
         Long totalCounts = 0L;
         List<Crawler> crawlers = new ArrayList<Crawler>();
         try{
-            //说明该关键字是某个网站的关键字
-            if(searchKeyword.contains("_")){
-                Url url = urlMapper.getUrlByKeyword(searchKeyword.split("_")[0]);
-                //共同的关键字
-                if(searchKeyword.contains("common")){
-                    Keyword keyword = keywordMapper.getKeywordBykeyword(searchKeyword.split("_")[0]);
-                    totalCounts = crawlerMapper.getCrawlerTotalByCommonSearchKeywordId(keyword.getId(), url.getId());
-                    crawlers = crawlerMapper.getPageByCommonSearchKeywordId(startIndex, pageSize, keyword.getId(), url.getId());
-                }else{
-                    totalCounts = crawlerMapper.getCrawlerTotalBySearchKeywordId(-1, url.getId());
-                    crawlers = crawlerMapper.getPageBySearchKeywordId(startIndex, pageSize, -1, url.getId());
-                }
-            }else{
-                Keyword keyword = keywordMapper.getKeywordBykeyword(searchKeyword);
-                totalCounts = crawlerMapper.getCrawlerTotalBySearchKeywordId(keyword.getId(), -1);
-                crawlers = crawlerMapper.getPageBySearchKeywordId(startIndex, pageSize, keyword.getId(), -1);
-            }
+            searchKeyword = URLDecoder.decode(searchKeyword, "utf-8");
+           if(searchKeyword != ""){
+               //说明该关键字是某个网站的关键字
+               if(searchKeyword.contains("_")){
+                   Url url = urlMapper.getUrlByKeyword(searchKeyword.split("_")[0]);
+                  if(url != null){
+                      //共同的关键字
+                      if(searchKeyword.contains("common")){
+                          Keyword keyword = keywordMapper.getKeywordBykeyword(searchKeyword.split("_")[0]);
+                          if(keyword != null){
+                              totalCounts = crawlerMapper.getCrawlerTotalByCommonSearchKeywordId(keyword.getId(), url.getId());
+                              crawlers = crawlerMapper.getPageByCommonSearchKeywordId(startIndex, pageSize, keyword.getId(), url.getId());
+                          }
+                      }else{
+                          totalCounts = crawlerMapper.getCrawlerTotalBySearchKeywordId(-1, url.getId());
+                          crawlers = crawlerMapper.getPageBySearchKeywordId(startIndex, pageSize, -1, url.getId());
+                      }
+                  }
+               }else{
+                   Keyword keyword = keywordMapper.getKeywordBykeyword(searchKeyword);
+                   if(keyword != null){
+                       totalCounts = crawlerMapper.getCrawlerTotalBySearchKeywordId(keyword.getId(), -1);
+                       crawlers = crawlerMapper.getPageBySearchKeywordId(startIndex, pageSize, keyword.getId(), -1);
+                   }
+               }
+           }
         }catch (Exception e){
             e.printStackTrace();
         }
         jsonObject.put("pageCount", (totalCounts / pageSize) + 1);
         jsonObject.put("crawlers", crawlers);
+
 
         ResponseUtils.renderJson(response, jsonObject);
     }

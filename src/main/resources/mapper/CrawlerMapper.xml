@@ -12,10 +12,11 @@
         <result column="pic_web_url" property="webURL"/>
         <result column="title_frequence" property="titleFrequence"/>
         <result column="body_frequence" property="bodyFrequence"/>
+        <result column="picture_source" property="pictureSource"/>
     </resultMap>
 
     <sql id="baseColumn">
-        id, keyword_id , url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence
+        id, keyword_id , url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence, picture_source
     </sql>
 
     <select id="listAllCrawler" resultMap="result">
@@ -47,10 +48,11 @@
     </select>
 
     <insert id="batchInsertCrawler" parameterType="java.util.List">
-        INSERT INTO pic(keyword_id, url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence) VALUES
+        INSERT INTO pic(keyword_id, url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence, picture_source) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.keywordId}, #{item.urlId}, #{item.pictureURL}, #{item.pictureName},
-            #{item.pictureDescription}, #{item.webURL}, #{item.titleFrequence}, #{item.bodyFrequence})
+            #{item.pictureDescription}, #{item.webURL}, #{item.titleFrequence},
+            #{item.bodyFrequence}, #{item.pictureSource})
         </foreach>
     </insert>
 </mapper>

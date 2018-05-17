@@ -1,6 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="referrer" content="no-referrer" />
         <title>主页</title>
 
         <link href="resources/css/semantic.min.css" rel="stylesheet" type="text/css">
@@ -13,8 +14,8 @@
     </head>
     <body>
     <div class="ui top attached tabular menu">
-        <a class="active item" data-tab="baidu">百度</a>
-        <a class="item" data-tab="someweb">网站列表</a>
+        <a class="active item" data-tab="baidu">广域网络抓取</a>
+        <a class="item" data-tab="someweb">重点关注网站</a>
         <a class="item" data-tab="result">查看最近一次提交的结果</a>
         <a class="item" data-tab="alreadyKeywordResult">本地数据库中已经爬虫的结果</a>
     </div>
@@ -404,7 +405,7 @@
                         }
                         $(".all_search_keyword").dropdown({
                             onChange:function(value, text, $choice){
-                                searchKeyword = value;
+                                searchKeyword = encodeURIComponent(value);
                                 getPageListData(searchKeyword,"keyword_result_list" ,"pager")
                             }
                         })
@@ -433,7 +434,7 @@
 
                         $(".all_alreadyCrawler_keyword").dropdown({
                             onChange:function(value, text, $choice){
-                                alreadyCrawler = value;
+                                alreadyCrawler = encodeURIComponent(value);
                                 getPageListData(alreadyCrawler,"alreadyCrawler_keyword_result_list" ,"pager2")
                             }
                         });
@@ -470,7 +471,9 @@
                     if(result != "" && result.crawlers != "" && result.crawlers.length > 0){
                         var midlleCrawlers = result.crawlers;
                         for(var i = 0 ; i < midlleCrawlers.length; i++){
-                            var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> <img src="'+midlleCrawlers[i].pictureURL+'"> </div> <div class="content"> <a class="header">'+
+                            var pictureURL = '<img src="'+midlleCrawlers[i].pictureURL+'">';
+
+                            var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> '+pictureURL + ' </div> <div class="content"> <a class="header">'+
                                     midlleCrawlers[i].pictureName+'</a> <div class="meta"> <span><a href="'+
                                     midlleCrawlers[i].webURL+'">该条信息来源于</a></span> </div> <div class="description"> <p>'+
                                     midlleCrawlers[i].pictureDescription+'</p> </div> </div> </div>');

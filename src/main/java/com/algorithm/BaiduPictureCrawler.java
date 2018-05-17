@@ -2,6 +2,7 @@ package com.algorithm;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.constants.Constant;
 import com.entity.Crawler;
 import com.mapper.CrawlerMapper;
 import org.jsoup.Jsoup;
@@ -13,10 +14,7 @@ import com.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -33,27 +31,28 @@ public class BaiduPictureCrawler {
     @Autowired
     private CrawlerMapper crawlerMapper;
 
-    public  void insertBaiduPicResult(String keyword, Integer id) {
+
+    public  void insertBaiduPicResult(String keyword, Integer id, String path) {
         //该示例是：污水处理厂
         JSONObject jsonObject = new JSONObject();
         try{
-            jsonObject = getJsonObject(keyword, 1);
+            jsonObject = getJsonObject(keyword, 4);
         }catch (Exception e){
            e.printStackTrace();
         }
         String total = jsonObject.getString("bdFmtDispNum").replace("约", "").replace(",","");
-        for(int i=1; i < Integer.parseInt(total)/30; i++){
+        for(int i=2; i < Integer.parseInt(total)/30; i++){
             try{
-                List<Crawler> crawlersTemp = getPictureURL(keyword, i, id);
+                List<Crawler> crawlersTemp = getPictureURL(keyword, i, id, path);
                 crawlerMapper.batchInsertCrawler(crawlersTemp);
-
+                Thread.currentThread().sleep(2);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
     }
 
-    public  List<Crawler> getPictureURL(String keyword, int pn, Integer id) throws Exception{
+    public  List<Crawler> getPictureURL(String keyword, int pn, Integer id, String path) throws Exception{
         List<Crawler> crawlers = new ArrayList<Crawler>();
         JSONObject json = getJsonObject(keyword, pn);
         JSONArray array = JSONArray.parseArray(json.getString("data"));
@@ -86,18 +85,42 @@ public class BaiduPictureCrawler {
                             Document document = Jsoup.parse(html);
 //                           Elements element = document.select("div p img").attr("src", objectURL);
                             Elements element = document.select("div p img");
-                            if(element.size() != 0){
-                                String description = Utils.getPictureContextDescription(element.get(0));
-                                Crawler crawler = new Crawler();
-                                crawler.setKeywordId(id);
-                                crawler.setUrlId(-1);
-                                crawler.setPictureURL(thumbURL);
-                                crawler.setWebURL(fromURL);
-                                crawler.setPictureDescription(description);
-                                crawler.setPictureName(fromPageTitleEnc);
-                                crawler.setBodyFrequence(bodyFrequence);
-                                crawler.setTitleFrequence(titleFrequence);
-                                crawlers.add(crawler);
+//                            if(element.size() != 0){
+                                //下载图片
+//                                String uuid = Utils.getUUID32();
+//
+//
+//                                HttpURLConnection connection = Utils.getHttpURLConnection(thumbURL);
+//                                connection.setRequestProperty("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+//                                connection.setRequestProperty("Accept-Encoding", "gzip, deflate, sdch");
+//                                connection.setRequestProperty("Accept-Language", "zh-CN,zh;q=0.8");
+//                                InputStream in = connection.getInputStream();
+//                                byte[] data = Utils.readInputStream(in);
+//                                File imageFile = new File(path + "/"+uuid + ".jpg");
+//
+//                                FileOutputStream out = new FileOutputStream(imageFile);
+//                                out.write(data);
+//                                out.close();
+                            for(Element e : element){
+                                String src = e.attr("src");
+                                if(src.startsWith("//")){
+                                    src = fromURL.split(":")[0] + src;
+                                }
+                                if(src.startsWith("http")){
+                                    String description = Utils.getPictureContextDescription(e);
+                                    Crawler crawler = new Crawler();
+                                    crawler.setKeywordId(id);
+                                    crawler.setUrlId(-1);
+                                    crawler.setPictureURL(src);
+                                    crawler.setWebURL(fromURL);
+                                    crawler.setPictureDescription(description);
+                                    crawler.setPictureName(fromPageTitleEnc);
+                                    crawler.setBodyFrequence(bodyFrequence);
+                                    crawler.setTitleFrequence(titleFrequence);
+                                    crawler.setPictureSource(Constant.BAIDUPICTURE);
+                                    crawlers.add(crawler);
+                                }
+
                             }
                         }
                     }

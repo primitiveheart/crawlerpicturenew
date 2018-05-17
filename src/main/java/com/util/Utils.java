@@ -1,20 +1,21 @@
 package com.util;
 
 
+import com.constants.Constant;
 import com.entity.Crawler;
+import com.sun.tools.corba.se.idl.StringGen;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.servlet.http.Cookie;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +35,11 @@ public class Utils {
         connection.setReadTimeout(2000);
         connection.setUseCaches(false);
         connection.setDoOutput(true);
+
+        String referer = realUrl.getProtocol() + "://" + realUrl.getHost();
+        connection.setRequestProperty("Host", realUrl.getHost());
+        connection.setRequestProperty("Referer", referer);
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36");
         return connection;
     }
 
@@ -89,6 +95,7 @@ public class Utils {
                     crawler.setPictureDescription(description);
                     crawler.setBodyFrequence(bodyFrequence);
                     crawler.setTitleFrequence(titleFrequence);
+                    crawler.setPictureSource(Constant.BAIDUSEARCH);
                 }else {
                     //这是对某个网站搜索的结果
                     if(alt.contains(keyword)){
@@ -100,6 +107,7 @@ public class Utils {
                         crawler.setPictureDescription(description);
                         crawler.setBodyFrequence(bodyFrequence);
                         crawler.setTitleFrequence(titleFrequence);
+                        crawler.setPictureSource(Constant.SOMEWEB);
                     }
                 }
                 crawlers.add(crawler);
@@ -227,6 +235,23 @@ public class Utils {
        }
 
         return sb.toString();
+    }
+
+    public static String getUUID32(){
+        String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        return uuid;
+    }
+
+    public static byte[] readInputStream(InputStream inputStream) throws Exception{
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1){
+            out.write(buffer, 0, len);
+        }
+
+        inputStream.close();
+        return out.toByteArray();
     }
 
 }
