@@ -127,7 +127,7 @@
         <div class="ui sub header">该搜索的关键字对应的结果</div>
         <div class="ui items keyword_result_list">
         </div>
-        <div id="pager"></div>
+        <div id="pager" class="pager"></div>
     </div>
 
     <div class="ui bottom attached tab segment" data-tab="alreadyKeywordResult">
@@ -142,7 +142,7 @@
         <div class="ui sub header">该已经爬虫关键字对应的结果</div>
         <div class="ui items alreadyCrawler_keyword_result_list">
         </div>
-        <div id="pager2"></div>
+        <div id="pager2" class="pager"></div>
     </div>
 
     <script language="JavaScript">
@@ -406,7 +406,7 @@
                         $(".all_search_keyword").dropdown({
                             onChange:function(value, text, $choice){
                                 searchKeyword = encodeURIComponent(value);
-                                getPageListData(searchKeyword,"keyword_result_list" ,"pager")
+                                getPageListData(searchKeyword,"keyword_result_list" ,"pager");
                             }
                         })
                     }
@@ -449,7 +449,7 @@
          */
 
         function getPageListData(keyword, queryClass, pagerId){
-            var pageCount = 10;//设置默认值
+            var pageCount = 0;
             var pageSize = 10;
             var pageResult = "";
 

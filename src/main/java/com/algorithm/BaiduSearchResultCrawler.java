@@ -28,21 +28,37 @@ public class BaiduSearchResultCrawler {
 
 
     public void insertBaiduSearchResult(String keyword, Integer id) {
+        List<String> urls = new ArrayList<>();
+        List<Crawler> crawlers = new ArrayList<Crawler>();
         try{
             //该例子是 java爬虫
-            List<String> urls = getAllCrawlerResultURLByKeyword(keyword);
-            List<Crawler> crawlers = new ArrayList<Crawler>();
-            for(int i=0 ; i<urls.size(); i++){
+            urls = getAllCrawlerResultURLByKeyword(keyword);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
+        for(int i=0 ; i<urls.size(); i++){
+            try{
                 List<Crawler> middle = Utils.getHtmlPicRelateContentByURL(urls.get(i), "", id);
                 crawlers.addAll(middle);
-                if(i % 100 == 0 && crawlers != null && crawlers.size() > 0){
+                if(i % 10 == 0 && crawlers != null && crawlers.size() > 0){
                     crawlerMapper.batchInsertCrawler(crawlers);
-                    crawlers.clear();
                 }
+            }catch (Exception e){
+                throw new RuntimeException(e);
+            }finally {
+                crawlers.clear();
             }
-        }catch (Exception e){
-
         }
+
+        try{
+            crawlerMapper.batchInsertCrawler(crawlers);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }finally {
+            crawlers.clear();
+        }
+
     }
 
     //得到所有的url

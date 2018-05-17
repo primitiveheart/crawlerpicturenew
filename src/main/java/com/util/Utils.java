@@ -71,9 +71,8 @@ public class Utils {
         Integer bodyFrequence = getHtmlKeyWordNumber(html, keyword);
         Integer titleFrequence = getTitleKeywordNumber(html, keyword);
         Document doc = Jsoup.parse(html);
-        Elements elements = doc.select("div > img");
+        Elements elements = doc.select("p > img");
         for(Element element : elements){
-
             String alt = element.attr("alt");
             String src = element.attr("src");
 
@@ -112,8 +111,6 @@ public class Utils {
                 }
                 crawlers.add(crawler);
             }
-
-
         }
         return crawlers;
     }

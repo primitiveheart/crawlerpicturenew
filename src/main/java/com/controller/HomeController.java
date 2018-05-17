@@ -167,6 +167,7 @@ public class HomeController {
             e.printStackTrace();
         }
         jsonObject.put("pageCount", (totalCounts / pageSize) + 1);
+//        jsonObject.put("pageCount", totalCounts);
         jsonObject.put("crawlers", crawlers);
 
 

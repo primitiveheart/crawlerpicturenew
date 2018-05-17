@@ -48,7 +48,7 @@
     </select>
 
     <insert id="batchInsertCrawler" parameterType="java.util.List">
-        INSERT INTO pic(keyword_id, url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence, picture_source) VALUES
+        INSERT INTO pic(keyword_id, url_id, pic, pic_name, pic_description, pic_web_url, title_frequence, body_frequence, picture_source) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.keywordId}, #{item.urlId}, #{item.pictureURL}, #{item.pictureName},
             #{item.pictureDescription}, #{item.webURL}, #{item.titleFrequence},
