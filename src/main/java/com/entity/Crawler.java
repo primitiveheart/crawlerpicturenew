@@ -1,6 +1,8 @@
 package com.entity;
 
 import java.io.InputStream;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by admin on 2018/4/26.
@@ -26,11 +28,26 @@ public class Crawler {
     private Integer bodyFrequence;
     //图片的来源,0:表示百度图片，1：表示百度搜索，2：表示某个网站
     private Integer pictureSource;
+    //新闻的来源
+    private String newSource;
+    //新闻的发布日期
+    private Timestamp newPublishDate;
+    //创建日期
+    private Timestamp createTime;
+    //更新的日期
+    private Timestamp updateTime;
+    //文本的内容
+    private String content;
+    //省
+    private String province;
+    //市
+    private String city;
 
 
     public Crawler(Long id, Integer urlId, Integer keywordId, String pictureURL, String pictureName,
                    String pictureDescription, String webURL, Integer titleFrequence, Integer bodyFrequence
-                ,Integer pictureSource) {
+                ,Integer pictureSource, String newSource, Timestamp newPublishDate, Timestamp createTime,
+                   Timestamp updateTime, String content, String province, String city) {
         this.id = id;
         this.urlId = urlId;
         this.keywordId = keywordId;
@@ -41,6 +58,13 @@ public class Crawler {
         this.titleFrequence = titleFrequence;
         this.bodyFrequence = bodyFrequence;
         this.pictureSource = pictureSource;
+        this.newSource = newSource;
+        this.newPublishDate = newPublishDate;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.content = content;
+        this.province = province;
+        this.city = city;
     }
 
     public Long getId() {
@@ -123,5 +147,61 @@ public class Crawler {
 
     public void setPictureSource(Integer pictureSource) {
         this.pictureSource = pictureSource;
+    }
+
+    public String getNewSource() {
+        return newSource;
+    }
+
+    public void setNewSource(String newSource) {
+        this.newSource = newSource;
+    }
+
+    public Timestamp getNewPublishDate() {
+        return newPublishDate;
+    }
+
+    public void setNewPublishDate(Timestamp newPublishDate) {
+        this.newPublishDate = newPublishDate;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

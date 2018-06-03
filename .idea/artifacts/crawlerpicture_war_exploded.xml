@@ -49,6 +49,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.44" />
           <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.4" />
           <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.23" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:5.0.0.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">

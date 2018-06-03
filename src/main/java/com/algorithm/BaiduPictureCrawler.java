@@ -17,7 +17,10 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,18 +39,22 @@ public class BaiduPictureCrawler {
         //该示例是：污水处理厂
         JSONObject jsonObject = new JSONObject();
         try{
-            jsonObject = getJsonObject(keyword, 4);
+            jsonObject = getJsonObject(keyword, 1);
         }catch (Exception e){
            e.printStackTrace();
         }
-        String total = jsonObject.getString("bdFmtDispNum").replace("约", "").replace(",","");
-        for(int i=2; i < Integer.parseInt(total)/30; i++){
-            try{
-                List<Crawler> crawlersTemp = getPictureURL(keyword, i, id, path);
-                crawlerMapper.batchInsertCrawler(crawlersTemp);
-                Thread.currentThread().sleep(2);
-            }catch (Exception e){
-                e.printStackTrace();
+        if(jsonObject != null){
+            String total = jsonObject.getString("bdFmtDispNum").replace("约", "").replace(",","");
+            for(int i=2; i < Integer.parseInt(total)/30; i++){
+                try{
+                    List<Crawler> crawlersTemp = getPictureURL(keyword, i, id, path);
+                    if(crawlersTemp != null && crawlersTemp.size() > 0){
+                        crawlerMapper.batchInsertCrawler(crawlersTemp);
+                    }
+                    Thread.currentThread().sleep(2);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -118,6 +125,10 @@ public class BaiduPictureCrawler {
                                     crawler.setBodyFrequence(bodyFrequence);
                                     crawler.setTitleFrequence(titleFrequence);
                                     crawler.setPictureSource(Constant.BAIDUPICTURE);
+                                    crawler.setCreateTime(new Timestamp(new Date().getTime()));
+                                    crawler.setUpdateTime(new Timestamp(new Date().getTime()));
+                                    crawler.setNewPublishDate(new Timestamp(Utils.parse(Utils.getHtmlPublishDate(html)).getTime()));
+                                    crawler.setNewSource(Utils.getNewSource(html));
                                     crawlers.add(crawler);
                                 }
 
@@ -149,12 +160,12 @@ public class BaiduPictureCrawler {
                 "fp=result&queryWord="+keyword +"&cl=2&lm=-1&ie=utf-8&" +
                 "oe=utf-8&adpicid=&st=&z=&ic=&word="+keyword+"&s=&se=&tab=&width=&height=&face=&" +
                 "istype=&qc=&nc=1&fr=&pn="+pn * 30+"&rn=30&gsm=78&1525855981119=";
-        HttpURLConnection connection = Utils.getHttpURLConnection(url);
+//        HttpURLConnection connection = Utils.getHttpURLConnection(url);
 
-        InputStream in = connection.getInputStream();
+//        InputStream in = connection.getInputStream();
 //        byte[] data = readInputStream(in);
 //        String dataStr = new String(data);
-        String dataStr = getHtml(connection);
+        String dataStr = Utils.getHtml(url);
         return JSONObject.parseObject(dataStr);
     }
 

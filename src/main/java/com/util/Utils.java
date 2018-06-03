@@ -10,10 +10,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -43,16 +48,32 @@ public class Utils {
         return connection;
     }
 
-    public static String getCharset(HttpURLConnection connection){
-        String contentType = connection.getContentType();
-        Pattern pattern = Pattern.compile("charset=.*");
-        Matcher matcher = pattern.matcher(contentType);
-        if(matcher.find()){
-            return matcher.group(0).split("charset=")[1];
-        }else{
-            return "utf-8";
+    public static String getCharset(HttpURLConnection connection) throws IOException{
+//        String contentType = connection.getContentType();
+//        Pattern pattern = Pattern.compile("charset=.*");
+//        Matcher matcher = pattern.matcher(contentType);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            if(line.contains("charset")){
+                Pattern pattern = Pattern.compile("charset=.*");
+                Matcher matcher = pattern.matcher(line);
+
+                if(matcher.find()){
+                    String temp = matcher.group(0);
+                    if(temp.contains("/>")){
+                        return temp.replaceAll("/>", "").split("=")[1].replaceAll("\"","").trim();
+                    }else{
+                        return temp.split("=")[1].replaceAll("\"","").trim();
+                    }
+                }else{
+                    return "utf-8";
+                }
+            }
         }
 
+        return "utf-8";
     }
 
 
@@ -88,27 +109,27 @@ public class Utils {
 
                     crawler.setUrlId(-1);
                     crawler.setKeywordId(id);
-                    crawler.setPictureURL(src);
-                    crawler.setWebURL(url);
-                    crawler.setPictureName(alt);
-                    crawler.setPictureDescription(description);
-                    crawler.setBodyFrequence(bodyFrequence);
-                    crawler.setTitleFrequence(titleFrequence);
                     crawler.setPictureSource(Constant.BAIDUSEARCH);
+
                 }else {
                     //这是对某个网站搜索的结果
                     if(alt.contains(keyword)){
                         crawler.setUrlId(id);
                         crawler.setKeywordId(-1);
-                        crawler.setPictureURL(src);
-                        crawler.setWebURL(url);
-                        crawler.setPictureName(alt);
-                        crawler.setPictureDescription(description);
-                        crawler.setBodyFrequence(bodyFrequence);
-                        crawler.setTitleFrequence(titleFrequence);
                         crawler.setPictureSource(Constant.SOMEWEB);
                     }
                 }
+                crawler.setPictureURL(src);
+                crawler.setWebURL(url);
+                crawler.setPictureName(alt);
+                crawler.setPictureDescription(description);
+                crawler.setBodyFrequence(bodyFrequence);
+                crawler.setTitleFrequence(titleFrequence);
+                crawler.setCreateTime(new Timestamp(new Date().getTime()));
+                crawler.setUpdateTime(new Timestamp(new Date().getTime()));
+                crawler.setNewPublishDate(new Timestamp(Utils.parse(Utils.getHtmlPublishDate(html)).getTime()));
+                crawler.setNewSource(getNewSource(html));
+
                 crawlers.add(crawler);
             }
         }
@@ -132,6 +153,50 @@ public class Utils {
         }
         return count;
     }
+
+    /**
+     * 得到新闻的发布日期
+     * @param text
+     * @return
+     */
+    public static String getHtmlPublishDate(String text){
+        Pattern pattern = Pattern.compile("[1-9]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])(\\s+(20|21|22|23|[0-1]\\d):[0-5]\\d:[0-5]\\d)?");
+//        Pattern pattern = Pattern.compile("[1-9]\\d{3}\\-(0?[1-9]|1[0-2])\\-(0?[1-9]|[12]\\d|3[01])\\s*(0?[1-9]|1\\d|2[0-3])(\\:(0?[1-9]|[1-5]\\d)){2}");
+//        Pattern pattern = Pattern.compile("[1-9]\\d{3}-(0?[1-9]|1[0-2])-(0?[1-9]|[12]\\d|3[01])");
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()){
+            return matcher.group(0);
+        }
+        return "";
+    }
+
+    /**
+     * 得到新闻的来源
+     * @param text
+     * @return
+     */
+    public static String getNewSource(String text){
+        Pattern pattern = Pattern.compile("来源.+");
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()){
+            return matcher.group(0).replaceAll("<([^>]*)>", "").replaceAll("\\&[a-zA-Z]{1,10};","").replaceAll("\\|","");
+        }
+        return "";
+    }
+
+    public static String getHtmlBody(String text){
+        Document document = Jsoup.parse(text);
+        Elements elements = document.getElementsByClass("class\\=\\\".*(main|text|context).*\\\"");
+        Pattern pattern = Pattern.compile("class\\=\\\".*(main|text|context).*\\\"");
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()){
+            return matcher.group(0);
+        }
+        return "";
+
+    }
+
+
 
     public static Integer getTitleKeywordNumber(String text, String keyword){
         Pattern pattern = Pattern.compile("<title>(.*?)</title>");
@@ -200,17 +265,20 @@ public class Utils {
     //得到html
     public static String getHtml(String url){
 
+        HttpURLConnection connection1 = null;
         HttpURLConnection connection = null;
 
         StringBuffer sb = new StringBuffer();
         BufferedReader reader = null;
 
        try{
+           connection1 = Utils.getHttpURLConnection(url);
+           String charset = getCharset(connection1);
            connection = Utils.getHttpURLConnection(url);
-           String charset = getCharset(connection);
            if(connection.getResponseCode() == 200){
-               reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), charset));
+
                String line;
+               reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), charset));
 
                while ((line = reader.readLine()) != null) {
                    sb.append(line,0,line.length());
@@ -250,5 +318,18 @@ public class Utils {
         inputStream.close();
         return out.toByteArray();
     }
+
+    public static Date parse(String str){
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            if(str == null){
+                return null;
+            }
+            return sdf.parse(str);
+        }catch (ParseException e){
+            throw new RuntimeException("日期解析失败");
+        }
+    }
+
 
 }

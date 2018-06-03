@@ -13,46 +13,55 @@
         <result column="title_frequence" property="titleFrequence"/>
         <result column="body_frequence" property="bodyFrequence"/>
         <result column="picture_source" property="pictureSource"/>
+        <result column="new_source" property="newSource"/>
+        <result column="new_publish_date" property="newPublishDate"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="content" property="content"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
     </resultMap>
 
     <sql id="baseColumn">
-        id, keyword_id , url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence, body_frequence, picture_source
+        id, keyword_id , url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence,
+        body_frequence, picture_source, new_source, new_publish_date, create_time, update_time, content, province, city
     </sql>
 
     <select id="listAllCrawler" resultMap="result">
-        SELECT <include refid="baseColumn"/> FROM pic
+        SELECT <include refid="baseColumn"/> FROM pic_copy
     </select>
 
     <select id="getCrawlerTotalBySearchKeywordId" parameterType="Integer" resultType="Long">
-        SELECT COUNT(*) FROM pic WHERE keyword_id = #{keywordId} and url_id = #{urlId}
+        SELECT COUNT(*) FROM pic_copy WHERE keyword_id = #{keywordId} and url_id = #{urlId}
     </select>
 
     <select id="getCrawlerTotalByCommonSearchKeywordId" parameterType="Integer" resultType="Long">
-        SELECT COUNT(*) FROM pic
+        SELECT COUNT(*) FROM pic_copy
         WHERE (keyword_id = #{keywordId} and url_id = -1)
         OR (keyword_id = -1 and url_id = #{urlId})
     </select>
 
     <select id="getPageBySearchKeywordId" parameterType="Integer"  resultMap="result">
-        SELECT <include refid="baseColumn"/> FROM pic
+        SELECT <include refid="baseColumn"/> FROM pic_copy
         WHERE keyword_id = #{keywordId} and url_id = #{urlId}
         ORDER BY title_frequence, body_frequence DESC
         limit #{start}, #{length}
     </select>
 
     <select id="getPageByCommonSearchKeywordId" parameterType="Integer"  resultMap="result">
-        SELECT <include refid="baseColumn"/> FROM pic
+        SELECT <include refid="baseColumn"/> FROM pic_copy
         WHERE (keyword_id = #{keywordId} and url_id = -1)
         OR keyword_id = -1 and url_id = #{urlId}
         limit #{start}, #{length}
     </select>
 
     <insert id="batchInsertCrawler" parameterType="java.util.List">
-        INSERT INTO pic(keyword_id, url_id, pic, pic_name, pic_description, pic_web_url, title_frequence, body_frequence, picture_source) VALUES
+        INSERT INTO pic_copy(keyword_id, url_id, pic_url, pic_name, pic_description, pic_web_url, title_frequence,body_frequence, picture_source, new_source, new_publish_date, create_time, update_time, content,province, city) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.keywordId}, #{item.urlId}, #{item.pictureURL}, #{item.pictureName},
             #{item.pictureDescription}, #{item.webURL}, #{item.titleFrequence},
-            #{item.bodyFrequence}, #{item.pictureSource})
+            #{item.bodyFrequence}, #{item.pictureSource}, #{item.newSource}, #{item.newPublishDate},
+            #{item.createTime}, #{item.updateTime},#{item.content}, #{item.province}, #{item.city})
         </foreach>
     </insert>
 </mapper>
