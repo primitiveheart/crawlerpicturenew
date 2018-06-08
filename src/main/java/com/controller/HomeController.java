@@ -8,8 +8,12 @@ import com.entity.Url;
 import com.mapper.CrawlerMapper;
 import com.mapper.KeywordMapper;
 import com.mapper.UrlMapper;
-import com.sun.media.sound.UlawCodec;
 import com.util.ResponseUtils;
+import de.l3s.boilerpipe.document.TextDocument;
+import de.l3s.boilerpipe.extractors.ArticleExtractor;
+import de.l3s.boilerpipe.sax.BoilerpipeSAXInput;
+import de.l3s.boilerpipe.sax.HTMLDocument;
+import de.l3s.boilerpipe.sax.HTMLFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URL;
 import java.net.URLDecoder;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -381,5 +385,25 @@ public class HomeController {
         }
 
         ResponseUtils.renderJson(response, jsonObject);
+    }
+
+    @RequestMapping("getArticleContentAndTitle.html")
+    @ResponseBody
+    public void getArticleContentAndTitle(HttpServletResponse response, String url){
+        JSONObject jsonObject = new JSONObject();
+        try{
+            URL u = new URL(url);
+            HTMLDocument htmlDoc = HTMLFetcher.fetch(u);
+            TextDocument doc = new BoilerpipeSAXInput(htmlDoc.toInputSource()).getTextDocument();
+            String title = doc.getTitle();
+            String content = ArticleExtractor.INSTANCE.getText(doc);
+
+            jsonObject.put("title", title);
+            jsonObject.put("content", content);
+
+            ResponseUtils.renderJson(response, jsonObject);
+        }catch (Exception e){
+            throw new RuntimeException("获取文章的内容和标题");
+        }
     }
 }

@@ -3,26 +3,28 @@ package com.util;
 
 import com.constants.Constant;
 import com.entity.Crawler;
-import com.sun.tools.corba.se.idl.StringGen;
+import de.l3s.boilerpipe.BoilerpipeExtractor;
+import de.l3s.boilerpipe.document.Image;
+import de.l3s.boilerpipe.document.TextDocument;
+import de.l3s.boilerpipe.extractors.ArticleExtractor;
+import de.l3s.boilerpipe.extractors.CommonExtractors;
+import de.l3s.boilerpipe.sax.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.xml.sax.InputSource;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 /**
  * Created by admin on 2018/4/27.
@@ -329,6 +331,48 @@ public class Utils {
         }catch (ParseException e){
             throw new RuntimeException("日期解析失败");
         }
+    }
+
+
+    public static void main(String[] args)throws Exception{
+        URL url = new URL("http://news.163.com/14/1112/11/AARJJ7QG00014AED.html");
+
+        // choose from a set of useful BoilerpipeExtractors...
+//        final BoilerpipeExtractor extractor = CommonExtractors.ARTICLE_EXTRACTOR;
+        // final BoilerpipeExtractor extractor = CommonExtractors.DEFAULT_EXTRACTOR;
+        // final BoilerpipeExtractor extractor = CommonExtractors.CANOLA_EXTRACTOR;
+        // final BoilerpipeExtractor extractor = CommonExtractors.LARGEST_CONTENT_EXTRACTOR;
+
+        // choose the operation mode (i.e., highlighting or extraction)
+        final HTMLHighlighter hh = HTMLHighlighter.newHighlightingInstance();
+        // final HTMLHighlighter hh = HTMLHighlighter.newExtractingInstance();
+
+//        PrintWriter out = new PrintWriter("E:\\intellij\\crawlerpicture\\src\\main\\webapp\\WEB-INF\\tep\\highlighted.html", "UTF-8");
+//        out.println("<base href=\"" + url + "\" >");
+//        out.println("<meta http-equiv=\"Content-Type\" content=\"text-html; charset=utf-8\" />");
+//        out.println(hh.process(url, extractor));
+//        out.close();
+
+
+
+        final HTMLDocument htmlDoc = HTMLFetcher.fetch(url);
+        final TextDocument doc = new BoilerpipeSAXInput(htmlDoc.toInputSource()).getTextDocument();
+//        final TextDocument doc = new BoilerpipeSAXInput(new InputSource(url.openStream(""))).getTextDocument();
+        String title = doc.getTitle();
+
+        String content = ArticleExtractor.INSTANCE.getText(doc);
+
+        final BoilerpipeExtractor extractor = CommonExtractors.KEEP_EVERYTHING_EXTRACTOR;
+        final ImageExtractor ie = ImageExtractor.INSTANCE;
+
+        List<Image> images = ie.process(url, extractor);
+
+        Collections.sort(images);
+        String image = null;
+        if (!images.isEmpty()) {
+            image = images.get(0).getSrc();
+        }
+
     }
 
 

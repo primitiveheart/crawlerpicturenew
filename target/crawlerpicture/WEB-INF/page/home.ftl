@@ -125,7 +125,12 @@
             </div>
         </div>
         <div class="ui sub header">该搜索的关键字对应的结果</div>
-        <div class="ui items keyword_result_list">
+        <#--<div class="ui right floated checkbox">-->
+            <#--<input type="checkbox" name="allSelected">-->
+            <#--<label>全选</label>-->
+        <#--</div>-->
+        <#--<div class="ui right floated primary button">下载</div>-->
+        <div class="ui divided items keyword_result_list">
         </div>
         <div id="pager" class="pager"></div>
     </div>
@@ -140,9 +145,19 @@
             </div>
         </div>
         <div class="ui sub header">该已经爬虫关键字对应的结果</div>
-        <div class="ui items alreadyCrawler_keyword_result_list">
+        <#--<div class="ui right floated checkbox">-->
+            <#--<input type="checkbox" name="allSelected">-->
+            <#--<label>全选</label>-->
+        <#--</div>-->
+        <#--<div class="ui right floated primary button">下载</div>-->
+        <div class="ui divided items alreadyCrawler_keyword_result_list">
         </div>
         <div id="pager2" class="pager"></div>
+    </div>
+
+    <div class="ui modal lookupModal">
+        <div class="header lookupHeader"></div>
+        <div class="content lookupContent"></div>
     </div>
 
     <script language="JavaScript">
@@ -162,6 +177,8 @@
             var newAddUrl = [];
 
             var newAddUrlKeyword = [];
+
+
             //显示新增的关键字
            var keywordsnewAddDropdown = $(".keywords_new_add").dropdown();
 
@@ -406,6 +423,8 @@
                         $(".all_search_keyword").dropdown({
                             onChange:function(value, text, $choice){
                                 searchKeyword = encodeURIComponent(value);
+                                //切换之前，把列表数据清理为空
+                                $(".ui.items.keyword_result_list").empty();
                                 getPageListData(searchKeyword,"keyword_result_list" ,"pager");
                             }
                         })
@@ -435,13 +454,39 @@
                         $(".all_alreadyCrawler_keyword").dropdown({
                             onChange:function(value, text, $choice){
                                 alreadyCrawler = encodeURIComponent(value);
+                                //切换之前，把列表数据清理为空
+                                $(".ui.items.alreadyCrawler_keyword_result_list").empty();
                                 getPageListData(alreadyCrawler,"alreadyCrawler_keyword_result_list" ,"pager2")
                             }
                         });
                     }
                 }
             })
+
+
         })
+
+        //浏览
+        function lookup(url){
+            $.ajax({
+                url:"getArticleContentAndTitle.html",
+                type:"get",
+                data:{
+                    url:url
+                },
+                success: function(data){
+                    $(".lookupModal").modal("show");
+                    $(".lookupHeader").html("");
+                    $(".lookupHeader").html(data.title);
+                    $(".lookupContent").html("");
+                    $(".lookupContent").html(data.content);
+                }
+            })
+        }
+        //下载
+        function download(url){
+
+        }
         /*
         第一个参数：关键字
         第二个参数：查询数据列表对应的class
@@ -473,13 +518,27 @@
                         for(var i = 0 ; i < midlleCrawlers.length; i++){
                             var pictureURL = '<img src="'+midlleCrawlers[i].pictureURL+'">';
 
-                            var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> '+pictureURL + ' </div> <div class="content"> <a class="header">'+
+                            var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> '+pictureURL +
+                                    ' </div> <div class="content"> <a class="header">'+
                                     midlleCrawlers[i].pictureName+'</a> <div class="meta"> <span><a href="'+
                                     midlleCrawlers[i].webURL+'">该条信息来源于</a></span> </div> <div class="description"> <p>'+
-                                    midlleCrawlers[i].pictureDescription+'</p> </div> </div> </div>');
+                                    midlleCrawlers[i].pictureDescription+'</p> </div><div class="extra"><div class="ui right floated download primary button" ' +
+                                    'data-url="'+midlleCrawlers[i].webURL+'">下载</div>' +
+                                    '<div class="ui right floated lookup primary button" data-url="'+midlleCrawlers[i].webURL+'">浏览</div></div></div> </div>');
                             $item.appendTo($(".ui.items." + queryClass));
                         }
                     }
+
+                    //--------------------------浏览-----------------------
+                    $(".lookup").on("click", function(){
+                        var url = $(this).attr("data-url");
+                        lookup(url);
+                    })
+                    //-------------------------下载------------------------
+                    $(".download").on("click", function(){
+                        var url = $(this).attr("data-url");
+                        download(url);
+                    })
 
                 }
             })
@@ -506,13 +565,27 @@
                            if(result != "" && result.crawlers != "" && result.crawlers.length > 0){
                                var midlleCrawlers = result.crawlers;
                                for(var i = 0 ; i < midlleCrawlers.length; i++){
-                                   var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> <img src="'+midlleCrawlers[i].pictureURL+'"> </div> <div class="content"> <a class="header">'+
+                                   var $item = $('<div class="item"> <div class="image" style="width: 100;height: 100"> <img src="'+midlleCrawlers[i].pictureURL+'"> ' +
+                                           '</div> <div class="content"> <a class="header">'+
                                            midlleCrawlers[i].pictureName+'</a> <div class="meta"> <span><a href="'+
                                            midlleCrawlers[i].webURL+'">该条信息来源于</a></span> </div> <div class="description"> <p>'+
-                                           midlleCrawlers[i].pictureDescription+'</p> </div> </div> </div>');
+                                           midlleCrawlers[i].pictureDescription+'</p> </div><div class="extra"><div class="ui right floated download primary button" ' +
+                                           'data-url="'+midlleCrawlers[i].webURL+'">下载</div>' +
+                                           '<div class="ui right floated lookup primary button" data-url="'+midlleCrawlers[i].webURL+'">浏览</div></div> </div> </div>');
                                    $item.appendTo($(".ui.items." + queryClass));
                                }
                            }
+
+                           //--------------------------浏览-----------------------
+                           $(".lookup").on("click", function(){
+                               var url = $(this).attr("data-url");
+                               lookup(url);
+                           })
+                           //-------------------------下载------------------------
+                           $(".download").on("click", function(){
+                               var url = $(this).attr("data-url");
+                               download(url);
+                           })
                        }
                    })
 
