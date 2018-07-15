@@ -7,5 +7,6 @@
         <typeAlias type="com.entity.Crawler" alias="crawler"/>
         <typeAlias type="com.entity.Keyword" alias="keyword"/>
         <typeAlias type="com.entity.Url" alias="url"/>
+        <typeAlias type="com.entity.User" alias="user"/>
     </typeAliases>
 </configuration>
