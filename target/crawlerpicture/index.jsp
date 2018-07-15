@@ -9,7 +9,7 @@
 </head>
 <body>
 <script language="JavaScript">
-    window.location.replace("home.html");
+    window.location.replace("login.html");
 </script>
 </body>
 </html>
