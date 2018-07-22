@@ -25,5 +25,7 @@ export default {
   },
   disableDynamicImport: true,
   publicPath: '/',
+  outputPath: '../src/WEB-INF/static',
+  disableDynamicImport: true,
   hash: true,
 };
